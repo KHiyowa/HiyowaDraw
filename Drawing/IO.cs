@@ -1,11 +1,37 @@
 ﻿using System.Windows.Forms;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using System.Collections.Generic;
 
 namespace Drawing
 {
     public partial class DrawingFm
     {
+        private static bool savedState = true;
+        //  開く
+        private void open()
+        {
+            //  フロートメニューを隠す
+            menu.Hide();
+            ofd.Filter = "HiyowaDraw グラフィックス|*.hdg";
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                FileStream fs = new FileStream(ofd.FileName,
+                    FileMode.Open, FileAccess.Read);
+                shapeList.Clear();
+                shapeList = (List<Shape>)bf.Deserialize(fs);
+                fs.Close();
+                this.Invalidate();
+                fileName = ofd.FileName;
+                setCaption();
+            }
+
+            //  フロートメニューを再表示
+            menu.Show();
+        }
+
         //  名前をつけて保存
         private void saveAs()
         {
@@ -37,21 +63,31 @@ namespace Drawing
                         FileAccess.Write);
             bf.Serialize(fs, shapeList);
             fs.Close();
+            savedState = true;
             fileName = name;
             setCaption();
         }
 
+        //  タイトルバーの表示
         public void setCaption()
         {
-            //  キャプションをセット
+            string text;
             if (fileName != null)
             {
-                Text = "HiyowaDraw - [" + Path.GetFileName(fileName) + "]";
-            }
-            else
+                text = Path.GetFileName(fileName);
+            } else
             {
-                Text = "HiyowaDraw - [無題]";
+                text = "無題";
             }
+
+            //  最終の保存から変更されていれば、タイトルバーに「*」を表示
+            if (savedState == false)
+            {
+                text += " *";
+            }
+
+            //  キャプションをセット
+            Text = "HiyowaDraw - [" + text + "]";
         }
     }
 }

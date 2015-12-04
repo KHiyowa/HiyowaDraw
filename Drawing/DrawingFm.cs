@@ -34,25 +34,7 @@ namespace Drawing
         //  ファイルを開く
         private void openTsmi_Click(object sender, EventArgs e)
         {
-            //  フロートメニューを隠す
-            menu.Hide();
-            ofd.Filter = "HiyowaDraw グラフィックス|*.hdg";
-
-            if (ofd.ShowDialog() == DialogResult.OK)
-            {
-                BinaryFormatter bf = new BinaryFormatter();
-                FileStream fs = new FileStream(ofd.FileName,
-                    FileMode.Open, FileAccess.Read);
-                shapeList.Clear();
-                shapeList = (List<Shape>)bf.Deserialize(fs);
-                fs.Close();
-                this.Invalidate();
-                fileName = ofd.FileName;
-                setCaption();
-            }
-
-            //  フロートメニューを再表示
-            menu.Show();
+            open();
         }
 
         //  名前をつけて保存
@@ -110,7 +92,5 @@ namespace Drawing
         {
             Close();
         }
-
-
     }
 }
