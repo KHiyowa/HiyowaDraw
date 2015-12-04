@@ -95,11 +95,11 @@
             // 
             // newTsmi
             // 
-            this.newTsmi.Enabled = false;
             this.newTsmi.Name = "newTsmi";
             this.newTsmi.ShortcutKeyDisplayString = "";
             this.newTsmi.Size = new System.Drawing.Size(184, 22);
             this.newTsmi.Text = "新規作成";
+            this.newTsmi.Click += new System.EventHandler(this.newTsmi_Click);
             // 
             // openTsmi
             // 
@@ -339,6 +339,7 @@
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DrawingFm_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.DrawingFm_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.DrawingFm_MouseUp);
+            this.Resize += new System.EventHandler(this.DrawingFm_Resize);
             this.commandBarMs.ResumeLayout(false);
             this.commandBarMs.PerformLayout();
             this.statusBarSs.ResumeLayout(false);

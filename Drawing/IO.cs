@@ -60,6 +60,17 @@ namespace Drawing
             setCaption();
         }
 
+        //  保存の確認
+        private DialogResult confirmSave()
+        {
+            return MessageBox.Show(getFileName() +
+                " は変更されています。保存しますか?",
+                "HiyowaDraw",
+                MessageBoxButtons.YesNoCancel,
+            MessageBoxIcon.Question);
+        }
+
+
         //  タイトルバーの保存状態とファイル名の更新
         private void setCaption()
         {
