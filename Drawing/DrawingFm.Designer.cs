@@ -56,7 +56,15 @@
             this.ofd = new System.Windows.Forms.OpenFileDialog();
             this.sfd = new System.Windows.Forms.SaveFileDialog();
             this.cd = new System.Windows.Forms.ColorDialog();
+            this.statusBarSs = new System.Windows.Forms.StatusStrip();
+            this.canvasTssl = new System.Windows.Forms.ToolStripStatusLabel();
+            this.canvasXTssl = new System.Windows.Forms.ToolStripStatusLabel();
+            this.canvasYTssl = new System.Windows.Forms.ToolStripStatusLabel();
+            this.coordinateTssl = new System.Windows.Forms.ToolStripStatusLabel();
+            this.coordinateXTssl = new System.Windows.Forms.ToolStripStatusLabel();
+            this.coordinateYTssl = new System.Windows.Forms.ToolStripStatusLabel();
             this.commandBarMs.SuspendLayout();
+            this.statusBarSs.SuspendLayout();
             this.SuspendLayout();
             // 
             // commandBarMs
@@ -118,6 +126,7 @@
             // 
             // exportTsmi
             // 
+            this.exportTsmi.Enabled = false;
             this.exportTsmi.Name = "exportTsmi";
             this.exportTsmi.Size = new System.Drawing.Size(184, 22);
             this.exportTsmi.Text = "エクスポート...";
@@ -262,12 +271,64 @@
             // 
             this.ofd.FileName = "openFileDialog1";
             // 
+            // statusBarSs
+            // 
+            this.statusBarSs.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.canvasTssl,
+            this.canvasXTssl,
+            this.canvasYTssl,
+            this.coordinateTssl,
+            this.coordinateXTssl,
+            this.coordinateYTssl});
+            this.statusBarSs.Location = new System.Drawing.Point(0, 335);
+            this.statusBarSs.Name = "statusBarSs";
+            this.statusBarSs.Size = new System.Drawing.Size(484, 23);
+            this.statusBarSs.TabIndex = 1;
+            this.statusBarSs.Text = "statusStrip1";
+            // 
+            // canvasTssl
+            // 
+            this.canvasTssl.Name = "canvasTssl";
+            this.canvasTssl.Size = new System.Drawing.Size(68, 18);
+            this.canvasTssl.Text = "キャンバス";
+            // 
+            // canvasXTssl
+            // 
+            this.canvasXTssl.Name = "canvasXTssl";
+            this.canvasXTssl.Size = new System.Drawing.Size(16, 18);
+            this.canvasXTssl.Text = "X";
+            // 
+            // canvasYTssl
+            // 
+            this.canvasYTssl.Name = "canvasYTssl";
+            this.canvasYTssl.Size = new System.Drawing.Size(16, 18);
+            this.canvasYTssl.Text = "Y";
+            // 
+            // coordinateTssl
+            // 
+            this.coordinateTssl.Name = "coordinateTssl";
+            this.coordinateTssl.Size = new System.Drawing.Size(32, 18);
+            this.coordinateTssl.Text = "座標";
+            // 
+            // coordinateXTssl
+            // 
+            this.coordinateXTssl.Name = "coordinateXTssl";
+            this.coordinateXTssl.Size = new System.Drawing.Size(30, 18);
+            this.coordinateXTssl.Text = "X =";
+            // 
+            // coordinateYTssl
+            // 
+            this.coordinateYTssl.Name = "coordinateYTssl";
+            this.coordinateYTssl.Size = new System.Drawing.Size(30, 18);
+            this.coordinateYTssl.Text = "Y =";
+            // 
             // DrawingFm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(484, 358);
+            this.Controls.Add(this.statusBarSs);
             this.Controls.Add(this.commandBarMs);
             this.MainMenuStrip = this.commandBarMs;
             this.Name = "DrawingFm";
@@ -276,9 +337,12 @@
             this.Load += new System.EventHandler(this.DrawingFm_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.DrawingFm_Paint);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DrawingFm_MouseDown);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.DrawingFm_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.DrawingFm_MouseUp);
             this.commandBarMs.ResumeLayout(false);
             this.commandBarMs.PerformLayout();
+            this.statusBarSs.ResumeLayout(false);
+            this.statusBarSs.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -313,6 +377,13 @@
         private System.Windows.Forms.ToolStripMenuItem drawTsmi;
         private System.Windows.Forms.ToolStripMenuItem eraseTsmi;
         private System.Windows.Forms.ToolStripMenuItem exportTsmi;
+        private System.Windows.Forms.StatusStrip statusBarSs;
+        private System.Windows.Forms.ToolStripStatusLabel canvasTssl;
+        private System.Windows.Forms.ToolStripStatusLabel canvasXTssl;
+        private System.Windows.Forms.ToolStripStatusLabel canvasYTssl;
+        private System.Windows.Forms.ToolStripStatusLabel coordinateTssl;
+        private System.Windows.Forms.ToolStripStatusLabel coordinateXTssl;
+        private System.Windows.Forms.ToolStripStatusLabel coordinateYTssl;
     }
 }
 

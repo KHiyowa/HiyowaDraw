@@ -8,6 +8,7 @@ namespace Drawing
         public static int currentMode;
         public static int currentShape;
         public static Color currentColor;
+        public static bool drawState = false;
 
         public class Mode
         {
@@ -39,6 +40,12 @@ namespace Drawing
             shapeList.Add(sh);
             //  再描画
             this.Invalidate();
+        }
+
+        private void DrawingFm_MouseMove(object sender, MouseEventArgs e)
+        {
+            coordinateXTssl.Text = "X = " + e.X.ToString();
+            coordinateYTssl.Text = "Y = " + (e.Y - commandBarMs.Height).ToString();
         }
 
         private void DrawingFm_MouseUp(object sender, MouseEventArgs e)
