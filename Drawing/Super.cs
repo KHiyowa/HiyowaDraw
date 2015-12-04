@@ -16,12 +16,17 @@ namespace Drawing
             public static int LINE = 2;
             protected int x1, y1, x2, y2;
             protected Color c;
+            protected int w;
 
             abstract public void Draw(Graphics g);
 
             public void SetColor(Color c)
             {
                 this.c = c;
+            }
+            public void SetWidth(int w)
+            {
+                this.w = w;
             }
             public void SetStartPoint(int x, int y)
             {
@@ -58,8 +63,7 @@ namespace Drawing
         {
             public override void Draw(Graphics g)
             {
-                SolidBrush sb = new SolidBrush(c);
-                Pen p = new Pen(sb);
+                Pen p = new Pen(c, w);
                 g.DrawLine(p, x1, y1, x2, y2);
             }
         }

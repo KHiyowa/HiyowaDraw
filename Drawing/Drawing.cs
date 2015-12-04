@@ -8,6 +8,7 @@ namespace Drawing
     {
         public static int currentMode;
         public static int currentShape;
+        public static int lineWidth;
         public static Color currentColor;
         public static bool drawState = false;
 
@@ -36,6 +37,8 @@ namespace Drawing
             }
             //  図形オブジェクトの色を設定
             sh.SetColor(currentColor);
+            //  線の太さを設定
+            sh.SetWidth(lineWidth);
             //  図形オブジェクトの座標を設定
             sh.SetStartPoint(e.X, e.Y);
             sh.SetEndPoint(e.X, e.Y);
@@ -66,7 +69,7 @@ namespace Drawing
             drawState = false;
         }
 
-        //  描画
+        //  再描画
         private void draw(MouseEventArgs e)
         {
             //  図形オブジェクトをリストから取り出す
@@ -95,6 +98,7 @@ namespace Drawing
             //  デフォルトの図形と色を設定
             currentShape = Shape.RECT;
             currentColor = Color.Blue;
+            lineWidth = 2;
 
             //  保存状態をクリア
             savedState = true;
@@ -104,12 +108,6 @@ namespace Drawing
             //  再描画
             this.Invalidate();
             setCaption();
-        }
-
-        //  キャンバスサイズの設定
-        private void setCanvasSize()
-        {
-
         }
 
         //  ステータスバーにキャンバスサイズを表示する
