@@ -46,9 +46,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Drawing.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -57,6 +54,9 @@
     </Compile>
     <Compile Include="DrawingFm.Designer.cs">
       <DependentUpon>DrawingFm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IO.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="MenuFm.cs">
       <SubType>Form</SubType>

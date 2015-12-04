@@ -9,7 +9,7 @@ namespace Drawing
         private List<Shape> shapeList;
 
         [Serializable]
-        abstract class Shape
+        abstract public class Shape
         {
             public static int RECT = 0;
             public static int OVAL = 1;

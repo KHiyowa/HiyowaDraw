@@ -5,8 +5,15 @@ namespace Drawing
 {
     public partial class DrawingFm
     {
-        private int currentShape;
-        private Color currentColor;
+        public static int currentMode;
+        public static int currentShape;
+        public static Color currentColor;
+
+        public class Mode
+        {
+            public static int DRAW = 0;
+            public static int ERASE = 1;
+        }
 
         public void DrawingFm_MouseDown(object sender, MouseEventArgs e)
         {
