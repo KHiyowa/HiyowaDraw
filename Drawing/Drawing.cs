@@ -49,6 +49,10 @@ namespace Drawing
             sh.SetEndPoint(e.X, e.Y);
             //  再描画
             this.Invalidate();
+            //  保存状態フラグを無効に
+            savedState = false;
+            //  キャプションの更新
+            setCaption();
         }
 
         private void DrawingFm_Paint(object sender, PaintEventArgs e)

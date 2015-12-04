@@ -5,7 +5,7 @@ namespace Drawing
 {
     public partial class DrawingFm
     {
-        private void DrawingFm_PrintPage(object sender, PrintPageEventArgs e)
+        private void pd_PrintPage(object sender, PrintPageEventArgs e)
         {
             Graphics g = e.Graphics;
 
@@ -14,5 +14,6 @@ namespace Drawing
                 sh.Draw(g);
             }
         }
+
     }
 }
