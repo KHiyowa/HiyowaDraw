@@ -72,5 +72,10 @@ namespace Drawing
         {
             reflesh();
         }
+
+        private void lineWidthNud_ValueChanged(object sender, EventArgs e)
+        {
+            DrawingFm.lineWidth = Decimal.ToInt32(lineWidthNud.Value);
+        }
     }
 }
