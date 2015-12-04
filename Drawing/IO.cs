@@ -11,8 +11,6 @@ namespace Drawing
         //  開く
         private void open()
         {
-            //  フロートメニューを隠す
-            menu.Hide();
             ofd.Filter = "HiyowaDraw グラフィックス|*.hdg";
 
             if (ofd.ShowDialog() == DialogResult.OK)
@@ -27,16 +25,11 @@ namespace Drawing
                 fileName = ofd.FileName;
                 setCaption();
             }
-
-            //  フロートメニューを再表示
-            menu.Show();
         }
 
         //  名前をつけて保存
         private void saveAs()
         {
-            menu.Hide();
-
             sfd.Filter = "HiyowaDraw グラフィックス|*.hdg";
             sfd.FileName = fileName;
 
@@ -44,7 +37,6 @@ namespace Drawing
             {
                 save(sfd.FileName);
             }
-            menu.Show();
         }
 
         //  上書き保存
@@ -68,7 +60,7 @@ namespace Drawing
             setCaption();
         }
 
-        //  タイトルバーの表示
+        //  タイトルバーの保存状態とファイル名の更新
         private void setCaption()
         {
             string text = getFileName();

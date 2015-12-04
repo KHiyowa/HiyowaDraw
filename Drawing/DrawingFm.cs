@@ -23,6 +23,7 @@ namespace Drawing
         //  フォームを閉じるとき
         private void DrawingFm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            menu.Hide();
             if (savedState == false)
             {
                 DialogResult result = MessageBox.Show(getFileName() + 
@@ -40,6 +41,7 @@ namespace Drawing
                 else if (result == DialogResult.Cancel)
                 {
                     e.Cancel = true;
+                    menu.Show();
                 }
             }
         }
@@ -56,13 +58,17 @@ namespace Drawing
         //  ファイルを開く
         private void openTsmi_Click(object sender, EventArgs e)
         {
+            menu.Hide();
             open();
+            menu.Show();
         }
 
         //  名前をつけて保存
         private void saveAsTsmi_Click(object sender, EventArgs e)
         {
+            menu.Hide();
             saveAs();
+            menu.Show();
         }
 
         private void saveTsmi_Click(object sender, EventArgs e)
@@ -110,6 +116,7 @@ namespace Drawing
             }
         }
 
+        //  終了
         private void quitTsmi_Click(object sender, EventArgs e)
         {
             Close();
