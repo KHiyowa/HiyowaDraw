@@ -13,11 +13,20 @@ namespace Drawing
         public static string fileName;
         public Form menu = new MenuFm();
 
+        public DrawingFm()
+        {
+            InitializeComponent();
+
+            //  新しいキャンバスを作成
+            newCanvas();
+        }
+
         //  フォームを開くとき
         private void DrawingFm_Load(object sender, System.EventArgs e)
         {
             menu.Show();
             setCaption();
+            indicateCanvasSize();
         }
 
         //  フォームを閉じるとき
@@ -26,11 +35,7 @@ namespace Drawing
             menu.Hide();
             if (savedState == false)
             {
-                DialogResult result = MessageBox.Show(getFileName() + 
-                    " は変更されています。保存しますか?",
-                    "HiyowaDraw",
-                    MessageBoxButtons.YesNoCancel,
-                    MessageBoxIcon.Question);
+                DialogResult result = confirmSave();
 
                 //  Yesを選択した場合、保存する
                 if (result == DialogResult.Yes)
@@ -44,15 +49,6 @@ namespace Drawing
                     menu.Show();
                 }
             }
-        }
-
-        public DrawingFm()
-        {
-            InitializeComponent();
-
-            shapeList = new List<Shape>();
-            currentShape = Shape.RECT;
-            currentColor = Color.Blue;
         }
 
         //  ファイルを開く
@@ -120,6 +116,37 @@ namespace Drawing
         private void quitTsmi_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        //  リサイズ
+        private void DrawingFm_Resize(object sender, EventArgs e)
+        {
+            indicateCanvasSize();
+        }
+
+        //  新規作成
+        private void newTsmi_Click(object sender, EventArgs e)
+        {
+            menu.Hide();
+            //  保存されていなければ確認
+            if (savedState != true)
+            {
+                DialogResult result = confirmSave();
+
+                //  Yesを選択した場合、保存する
+                if (result == DialogResult.Yes)
+                {
+                    save(fileName);
+                }
+                //  キャンセルを選択した場合、新規作成をキャンセルする
+                else if (result == DialogResult.Cancel)
+                {
+                    menu.Show();
+                    return;
+                }
+            }
+            newCanvas();
+            menu.Show();
         }
     }
 }
