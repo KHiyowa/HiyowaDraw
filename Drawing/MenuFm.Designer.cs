@@ -39,11 +39,13 @@
             this.drawBtn = new System.Windows.Forms.RadioButton();
             this.topMostCb = new System.Windows.Forms.CheckBox();
             this.attributeGb = new System.Windows.Forms.GroupBox();
+            this.lineWidthLb = new System.Windows.Forms.Label();
+            this.lineWidthNud = new System.Windows.Forms.NumericUpDown();
             this.colorBtn = new System.Windows.Forms.Button();
             this.cd = new System.Windows.Forms.ColorDialog();
             this.refreshTm = new System.Windows.Forms.Timer(this.components);
-            this.lineWidthNud = new System.Windows.Forms.NumericUpDown();
-            this.lineWidthLb = new System.Windows.Forms.Label();
+            this.fillBtn = new System.Windows.Forms.CheckBox();
+            this.tt = new System.Windows.Forms.ToolTip(this.components);
             this.drawingGb.SuspendLayout();
             this.ModeGb.SuspendLayout();
             this.attributeGb.SuspendLayout();
@@ -55,9 +57,9 @@
             this.drawingGb.Controls.Add(this.lineBtn);
             this.drawingGb.Controls.Add(this.ovalBtn);
             this.drawingGb.Controls.Add(this.rectBtn);
-            this.drawingGb.Location = new System.Drawing.Point(138, 10);
+            this.drawingGb.Location = new System.Drawing.Point(138, 12);
             this.drawingGb.Name = "drawingGb";
-            this.drawingGb.Size = new System.Drawing.Size(134, 130);
+            this.drawingGb.Size = new System.Drawing.Size(121, 130);
             this.drawingGb.TabIndex = 0;
             this.drawingGb.TabStop = false;
             this.drawingGb.Text = "図形";
@@ -73,6 +75,7 @@
             this.lineBtn.TabIndex = 4;
             this.lineBtn.Text = "／";
             this.lineBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.tt.SetToolTip(this.lineBtn, "直線を描画します");
             this.lineBtn.UseVisualStyleBackColor = true;
             this.lineBtn.CheckedChanged += new System.EventHandler(this.lineBtn_CheckedChanged);
             // 
@@ -87,6 +90,7 @@
             this.ovalBtn.TabIndex = 3;
             this.ovalBtn.Text = "●";
             this.ovalBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.tt.SetToolTip(this.ovalBtn, "楕円を描画します");
             this.ovalBtn.UseVisualStyleBackColor = true;
             this.ovalBtn.CheckedChanged += new System.EventHandler(this.ovalBtn_CheckedChanged);
             // 
@@ -103,6 +107,7 @@
             this.rectBtn.TabStop = true;
             this.rectBtn.Text = "■";
             this.rectBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.tt.SetToolTip(this.rectBtn, "四角形を描画します");
             this.rectBtn.UseVisualStyleBackColor = true;
             this.rectBtn.CheckedChanged += new System.EventHandler(this.rectBtn_CheckedChanged);
             // 
@@ -130,6 +135,7 @@
             this.radioButton1.TabIndex = 1;
             this.radioButton1.Text = "消";
             this.radioButton1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.tt.SetToolTip(this.radioButton1, "消去します");
             this.radioButton1.UseVisualStyleBackColor = true;
             // 
             // drawBtn
@@ -147,6 +153,7 @@
             this.drawBtn.Text = "描";
             this.drawBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.drawBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.tt.SetToolTip(this.drawBtn, "描画します");
             this.drawBtn.UseVisualStyleBackColor = true;
             // 
             // topMostCb
@@ -164,31 +171,25 @@
             // 
             // attributeGb
             // 
+            this.attributeGb.Controls.Add(this.fillBtn);
             this.attributeGb.Controls.Add(this.lineWidthLb);
             this.attributeGb.Controls.Add(this.lineWidthNud);
             this.attributeGb.Controls.Add(this.colorBtn);
-            this.attributeGb.Location = new System.Drawing.Point(278, 12);
+            this.attributeGb.Location = new System.Drawing.Point(265, 14);
             this.attributeGb.Name = "attributeGb";
-            this.attributeGb.Size = new System.Drawing.Size(65, 128);
+            this.attributeGb.Size = new System.Drawing.Size(122, 128);
             this.attributeGb.TabIndex = 3;
             this.attributeGb.TabStop = false;
             this.attributeGb.Text = "属性";
             // 
-            // colorBtn
+            // lineWidthLb
             // 
-            this.colorBtn.Location = new System.Drawing.Point(7, 16);
-            this.colorBtn.Name = "colorBtn";
-            this.colorBtn.Size = new System.Drawing.Size(50, 50);
-            this.colorBtn.TabIndex = 5;
-            this.colorBtn.Text = "色";
-            this.colorBtn.UseVisualStyleBackColor = true;
-            this.colorBtn.Click += new System.EventHandler(this.colorBtn_Click);
-            // 
-            // refreshTm
-            // 
-            this.refreshTm.Enabled = true;
-            this.refreshTm.Interval = 1000;
-            this.refreshTm.Tick += new System.EventHandler(this.refreshTm_Tick);
+            this.lineWidthLb.AutoSize = true;
+            this.lineWidthLb.Location = new System.Drawing.Point(6, 72);
+            this.lineWidthLb.Name = "lineWidthLb";
+            this.lineWidthLb.Size = new System.Drawing.Size(47, 12);
+            this.lineWidthLb.TabIndex = 2;
+            this.lineWidthLb.Text = "線の太さ";
             // 
             // lineWidthNud
             // 
@@ -204,20 +205,43 @@
             0});
             this.lineWidthNud.ValueChanged += new System.EventHandler(this.lineWidthNud_ValueChanged);
             // 
-            // lineWidthLb
+            // colorBtn
             // 
-            this.lineWidthLb.AutoSize = true;
-            this.lineWidthLb.Location = new System.Drawing.Point(6, 72);
-            this.lineWidthLb.Name = "lineWidthLb";
-            this.lineWidthLb.Size = new System.Drawing.Size(47, 12);
-            this.lineWidthLb.TabIndex = 2;
-            this.lineWidthLb.Text = "線の太さ";
+            this.colorBtn.Location = new System.Drawing.Point(8, 16);
+            this.colorBtn.Name = "colorBtn";
+            this.colorBtn.Size = new System.Drawing.Size(50, 50);
+            this.colorBtn.TabIndex = 5;
+            this.tt.SetToolTip(this.colorBtn, "色を変更します");
+            this.colorBtn.UseVisualStyleBackColor = true;
+            this.colorBtn.Click += new System.EventHandler(this.colorBtn_Click);
+            // 
+            // refreshTm
+            // 
+            this.refreshTm.Enabled = true;
+            this.refreshTm.Interval = 1000;
+            this.refreshTm.Tick += new System.EventHandler(this.refreshTm_Tick);
+            // 
+            // fillBtn
+            // 
+            this.fillBtn.Appearance = System.Windows.Forms.Appearance.Button;
+            this.fillBtn.Checked = true;
+            this.fillBtn.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.fillBtn.Font = new System.Drawing.Font("MS UI Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.fillBtn.Location = new System.Drawing.Point(64, 16);
+            this.fillBtn.Name = "fillBtn";
+            this.fillBtn.Size = new System.Drawing.Size(50, 50);
+            this.fillBtn.TabIndex = 7;
+            this.fillBtn.Text = "■";
+            this.fillBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.tt.SetToolTip(this.fillBtn, "塗りつぶしの有無を切り替えます");
+            this.fillBtn.UseVisualStyleBackColor = true;
+            this.fillBtn.CheckedChanged += new System.EventHandler(this.fillBtn_CheckedChanged);
             // 
             // MenuFm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(357, 171);
+            this.ClientSize = new System.Drawing.Size(397, 171);
             this.ControlBox = false;
             this.Controls.Add(this.attributeGb);
             this.Controls.Add(this.topMostCb);
@@ -253,5 +277,7 @@
         private System.Windows.Forms.Timer refreshTm;
         private System.Windows.Forms.Label lineWidthLb;
         private System.Windows.Forms.NumericUpDown lineWidthNud;
+        private System.Windows.Forms.CheckBox fillBtn;
+        private System.Windows.Forms.ToolTip tt;
     }
 }

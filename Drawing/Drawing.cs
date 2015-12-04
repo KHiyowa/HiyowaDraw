@@ -8,6 +8,7 @@ namespace Drawing
     {
         public static int currentMode;
         public static int currentShape;
+        public static bool shapeFilled;
         public static int lineWidth;
         public static Color currentColor;
         public static bool drawState = false;
@@ -25,11 +26,27 @@ namespace Drawing
             Shape sh = null;
             if (currentShape == Shape.RECT)
             {
-                sh = new Rect();
+                if (shapeFilled)
+                {
+                    sh = new FillRect();
+                }
+                else
+                {
+                    sh = new OutlineRect();
+                }
+                
             }
             else if (currentShape == Shape.OVAL)
             {
-                sh = new Oval();
+                if (shapeFilled)
+                {
+                    sh = new FillOval();
+                }
+                else
+                {
+                    sh = new OutlineOval();
+                }
+                
             }
             else if (currentShape == Shape.LINE)
             {
@@ -98,6 +115,7 @@ namespace Drawing
             //  デフォルトの図形と色を設定
             currentShape = Shape.RECT;
             currentColor = Color.Blue;
+            shapeFilled = true;
             lineWidth = 2;
 
             //  保存状態をクリア

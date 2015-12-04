@@ -39,7 +39,17 @@ namespace Drawing
         }
 
         [Serializable]
-        class Rect : Shape
+        class OutlineRect : Shape
+        {
+            public override void Draw(Graphics g)
+            {
+                Pen p = new Pen(c, w);
+                g.DrawRectangle(p, x1, y1, x2 - x1, y2 - y1);
+            }
+        }
+
+        [Serializable]
+        class FillRect : Shape
         {
             public override void Draw(Graphics g)
             {
@@ -49,7 +59,17 @@ namespace Drawing
         }
 
         [Serializable]
-        class Oval : Shape
+        class OutlineOval : Shape
+        {
+            public override void Draw(Graphics g)
+            {
+                Pen p = new Pen(c, w);
+                g.DrawEllipse(p, x1, y1, x2 - x1, y2 - y1);
+            }
+        }
+
+        [Serializable]
+        class FillOval : Shape
         {
             public override void Draw(Graphics g)
             {
