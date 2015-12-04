@@ -12,11 +12,38 @@ namespace Drawing
     {
         public static string fileName;
         public Form menu = new MenuFm();
+
+        //  フォームを開くとき
         private void DrawingFm_Load(object sender, System.EventArgs e)
         {
             menu.Show();
             setCaption();
         }
+
+        //  フォームを閉じるとき
+        private void DrawingFm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (savedState == false)
+            {
+                DialogResult result = MessageBox.Show(getFileName() + 
+                    " は変更されています。保存しますか?",
+                    "HiyowaDraw",
+                    MessageBoxButtons.YesNoCancel,
+                    MessageBoxIcon.Question);
+
+                //  Yesを選択した場合、保存する
+                if (result == DialogResult.Yes)
+                {
+                    save(fileName);
+                }
+                //  キャンセルを選択した場合、終了をキャンセルする
+                else if (result == DialogResult.Cancel)
+                {
+                    e.Cancel = true;
+                }
+            }
+        }
+
         public DrawingFm()
         {
             InitializeComponent();
@@ -24,11 +51,6 @@ namespace Drawing
             shapeList = new List<Shape>();
             currentShape = Shape.RECT;
             currentColor = Color.Blue;
-
-            MouseDown += new MouseEventHandler(DrawingFm_MouseDown);
-            MouseUp += new MouseEventHandler(DrawingFm_MouseUp);
-            Paint += new PaintEventHandler(DrawingFm_Paint);
-            pd.PrintPage += new PrintPageEventHandler(DrawingFm_PrintPage);
         }
 
         //  ファイルを開く

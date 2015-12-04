@@ -35,6 +35,7 @@
             this.openTsmi = new System.Windows.Forms.ToolStripMenuItem();
             this.saveTsmi = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsTsmi = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportTsmi = new System.Windows.Forms.ToolStripMenuItem();
             this.printSubTsmi = new System.Windows.Forms.ToolStripMenuItem();
             this.printTsmi = new System.Windows.Forms.ToolStripMenuItem();
             this.printPreviewTsmi = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,8 +49,8 @@
             this.ovalTsmi = new System.Windows.Forms.ToolStripMenuItem();
             this.lineTsmi = new System.Windows.Forms.ToolStripMenuItem();
             this.colorTsmi = new System.Windows.Forms.ToolStripMenuItem();
-            this.ヘルプToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.バージョン情報ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpTsmi = new System.Windows.Forms.ToolStripMenuItem();
+            this.versionTsmi = new System.Windows.Forms.ToolStripMenuItem();
             this.pd = new System.Drawing.Printing.PrintDocument();
             this.pp = new System.Windows.Forms.PrintPreviewDialog();
             this.ofd = new System.Windows.Forms.OpenFileDialog();
@@ -63,7 +64,7 @@
             this.commandBarMs.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileTsmi,
             this.optionTsmi,
-            this.ヘルプToolStripMenuItem});
+            this.helpTsmi});
             this.commandBarMs.Location = new System.Drawing.Point(0, 0);
             this.commandBarMs.Name = "commandBarMs";
             this.commandBarMs.Size = new System.Drawing.Size(484, 26);
@@ -77,6 +78,7 @@
             this.openTsmi,
             this.saveTsmi,
             this.saveAsTsmi,
+            this.exportTsmi,
             this.printSubTsmi,
             this.quitTsmi});
             this.fileTsmi.Name = "fileTsmi";
@@ -113,6 +115,12 @@
             this.saveAsTsmi.Size = new System.Drawing.Size(184, 22);
             this.saveAsTsmi.Text = "名前をつけて保存...";
             this.saveAsTsmi.Click += new System.EventHandler(this.saveAsTsmi_Click);
+            // 
+            // exportTsmi
+            // 
+            this.exportTsmi.Name = "exportTsmi";
+            this.exportTsmi.Size = new System.Drawing.Size(184, 22);
+            this.exportTsmi.Text = "エクスポート...";
             // 
             // printSubTsmi
             // 
@@ -221,20 +229,24 @@
             this.colorTsmi.Text = "色";
             this.colorTsmi.Click += new System.EventHandler(this.colorTsmi_Click);
             // 
-            // ヘルプToolStripMenuItem
+            // helpTsmi
             // 
-            this.ヘルプToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.バージョン情報ToolStripMenuItem});
-            this.ヘルプToolStripMenuItem.Enabled = false;
-            this.ヘルプToolStripMenuItem.Name = "ヘルプToolStripMenuItem";
-            this.ヘルプToolStripMenuItem.Size = new System.Drawing.Size(56, 22);
-            this.ヘルプToolStripMenuItem.Text = "ヘルプ";
+            this.helpTsmi.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.versionTsmi});
+            this.helpTsmi.Enabled = false;
+            this.helpTsmi.Name = "helpTsmi";
+            this.helpTsmi.Size = new System.Drawing.Size(56, 22);
+            this.helpTsmi.Text = "ヘルプ";
             // 
-            // バージョン情報ToolStripMenuItem
+            // versionTsmi
             // 
-            this.バージョン情報ToolStripMenuItem.Name = "バージョン情報ToolStripMenuItem";
-            this.バージョン情報ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.バージョン情報ToolStripMenuItem.Text = "バージョン情報";
+            this.versionTsmi.Name = "versionTsmi";
+            this.versionTsmi.Size = new System.Drawing.Size(160, 22);
+            this.versionTsmi.Text = "バージョン情報";
+            // 
+            // pd
+            // 
+            this.pd.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.pd_PrintPage);
             // 
             // pp
             // 
@@ -260,7 +272,11 @@
             this.MainMenuStrip = this.commandBarMs;
             this.Name = "DrawingFm";
             this.Text = "HiyowaDraw";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DrawingFm_FormClosing);
             this.Load += new System.EventHandler(this.DrawingFm_Load);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.DrawingFm_Paint);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DrawingFm_MouseDown);
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.DrawingFm_MouseUp);
             this.commandBarMs.ResumeLayout(false);
             this.commandBarMs.PerformLayout();
             this.ResumeLayout(false);
@@ -290,12 +306,13 @@
         private System.Windows.Forms.ToolStripMenuItem printTsmi;
         private System.Windows.Forms.ToolStripMenuItem printPreviewTsmi;
         private System.Windows.Forms.ToolStripMenuItem quitTsmi;
-        private System.Windows.Forms.ToolStripMenuItem ヘルプToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem バージョン情報ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem helpTsmi;
+        private System.Windows.Forms.ToolStripMenuItem versionTsmi;
         public System.Windows.Forms.ColorDialog cd;
         private System.Windows.Forms.ToolStripMenuItem modeTsmi;
         private System.Windows.Forms.ToolStripMenuItem drawTsmi;
         private System.Windows.Forms.ToolStripMenuItem eraseTsmi;
+        private System.Windows.Forms.ToolStripMenuItem exportTsmi;
     }
 }
 

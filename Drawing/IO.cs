@@ -69,17 +69,9 @@ namespace Drawing
         }
 
         //  タイトルバーの表示
-        public void setCaption()
+        private void setCaption()
         {
-            string text;
-            if (fileName != null)
-            {
-                text = Path.GetFileName(fileName);
-            } else
-            {
-                text = "無題";
-            }
-
+            string text = getFileName();
             //  最終の保存から変更されていれば、タイトルバーに「*」を表示
             if (savedState == false)
             {
@@ -88,6 +80,24 @@ namespace Drawing
 
             //  キャプションをセット
             Text = "HiyowaDraw - [" + text + "]";
+        }
+
+        //  ファイル名の取得
+        private string getFileName()
+        {
+            string text;
+
+            //  fileNameに値が存在すれば、ファイル名を返す
+            if (fileName != null)
+            {
+                text = Path.GetFileName(fileName);
+            }
+            //  値が存在しなければ、"無題"を返す
+            else
+            {
+                text = "無題";
+            }
+            return text;
         }
     }
 }
