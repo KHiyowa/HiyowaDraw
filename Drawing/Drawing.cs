@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -23,6 +23,9 @@ namespace Drawing
         {
             //  描画状態フラグを有効にする
             drawState = true;
+            //  Redoスタックをクリアする
+            redoStack.Clear();
+
             Shape sh = null;
             if (currentShape == Shape.RECT)
             {
@@ -61,8 +64,6 @@ namespace Drawing
             sh.SetEndPoint(e.X, e.Y);
             //  図形オブジェクトをリストに追加
             shapeList.Add(sh);
-            //  再描画
-            this.Invalidate();
         }
 
         private void DrawingFm_MouseMove(object sender, MouseEventArgs e)
@@ -86,15 +87,13 @@ namespace Drawing
             drawState = false;
         }
 
-        //  再描画
+        //  描画
         private void draw(MouseEventArgs e)
         {
             //  図形オブジェクトをリストから取り出す
             Shape sh =
                 (Shape)(shapeList[shapeList.Count - 1] as Shape);
             sh.SetEndPoint(e.X, e.Y);
-            //  再描画
-            this.Invalidate();
         }
 
         private void DrawingFm_Paint(object sender, PaintEventArgs e)
@@ -105,35 +104,6 @@ namespace Drawing
             {
                 sh.Draw(g);
             }
-        }
-
-        //  新規作成
-        private void newCanvas()
-        {
-            //  リストを初期化
-            shapeList = new List<Shape>();
-            //  デフォルトの図形と色を設定
-            currentShape = Shape.RECT;
-            currentColor = Color.Blue;
-            shapeFilled = true;
-            lineWidth = 2;
-
-            //  保存状態をクリア
-            savedState = true;
-            //  ファイル名をクリア
-            fileName = null;
-
-            //  再描画
-            this.Invalidate();
-            setCaption();
-        }
-
-        //  ステータスバーにキャンバスサイズを表示する
-        private void indicateCanvasSize()
-        {
-            Size canvasSize = this.ClientSize;
-            canvasXTssl.Text = "X = " + canvasSize.Width.ToString();
-            canvasYTssl.Text = "Y = " + (canvasSize.Height - commandBarMs.Height).ToString();
         }
     }
 }

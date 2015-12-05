@@ -47,6 +47,24 @@ namespace Drawing
         //  コマンドバーから変更された設定をフロートメニューに反映する
         public void reflesh()
         {
+            //  Undoの可否を反映
+            if (DrawingFm.shapeList.Count != 0)
+            {
+                undoBtn.Enabled = true;
+            }
+            else
+            {
+                undoBtn.Enabled = false;
+            }
+            //  Redoの可否を反映
+            if (DrawingFm.redoStack.Count != 0)
+            {
+                redoBtn.Enabled = true;
+            }
+            else
+            {
+                redoBtn.Enabled = false;
+            }
             //  塗りつぶしの状態を反映
             fillBtn.Checked = DrawingFm.shapeFilled;
             if (DrawingFm.shapeFilled)
@@ -114,6 +132,16 @@ namespace Drawing
         private void fillBtn_CheckedChanged(object sender, EventArgs e)
         {
             DrawingFm.shapeFilled = fillBtn.Checked;
+        }
+
+        private void undoBtn_Click(object sender, EventArgs e)
+        {
+            DrawingFm.undo();
+        }
+
+        private void redoBtn_Click(object sender, EventArgs e)
+        {
+            DrawingFm.redo();
         }
     }
 }

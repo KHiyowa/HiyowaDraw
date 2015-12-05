@@ -6,7 +6,8 @@ namespace Drawing
 {
     public partial class DrawingFm
     {
-        private List<Shape> shapeList;
+        public static List<Shape> shapeList;
+        public static Stack<Shape> redoStack;
 
         [Serializable]
         abstract public class Shape

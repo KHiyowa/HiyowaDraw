@@ -148,5 +148,10 @@ namespace Drawing
             newCanvas();
             menu.Show();
         }
+
+        private void invalidateTm_Tick(object sender, EventArgs e)
+        {
+            this.Invalidate();
+        }
     }
 }
