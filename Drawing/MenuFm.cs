@@ -115,5 +115,12 @@ namespace Drawing
         {
             DrawingFm.shapeFilled = fillBtn.Checked;
         }
+
+        private void undoBtn_Click(object sender, EventArgs e)
+        {
+            Control inv = new DrawingFm();
+            inv.Invalidate();
+            inv.Dispose();
+        }
     }
 }
