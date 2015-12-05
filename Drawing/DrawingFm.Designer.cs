@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DrawingFm));
             this.commandBarMs = new System.Windows.Forms.MenuStrip();
             this.fileTsmi = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,6 +64,7 @@
             this.coordinateTssl = new System.Windows.Forms.ToolStripStatusLabel();
             this.coordinateXTssl = new System.Windows.Forms.ToolStripStatusLabel();
             this.coordinateYTssl = new System.Windows.Forms.ToolStripStatusLabel();
+            this.invalidateTm = new System.Windows.Forms.Timer(this.components);
             this.commandBarMs.SuspendLayout();
             this.statusBarSs.SuspendLayout();
             this.SuspendLayout();
@@ -322,6 +324,12 @@
             this.coordinateYTssl.Size = new System.Drawing.Size(30, 18);
             this.coordinateYTssl.Text = "Y =";
             // 
+            // invalidateTm
+            // 
+            this.invalidateTm.Enabled = true;
+            this.invalidateTm.Interval = 33;
+            this.invalidateTm.Tick += new System.EventHandler(this.invalidateTm_Tick);
+            // 
             // DrawingFm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -385,6 +393,7 @@
         private System.Windows.Forms.ToolStripStatusLabel coordinateTssl;
         private System.Windows.Forms.ToolStripStatusLabel coordinateXTssl;
         private System.Windows.Forms.ToolStripStatusLabel coordinateYTssl;
+        private System.Windows.Forms.Timer invalidateTm;
     }
 }
 

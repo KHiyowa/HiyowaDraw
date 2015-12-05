@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System.Collections;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Drawing
@@ -22,6 +23,9 @@ namespace Drawing
         {
             //  描画状態フラグを有効にする
             drawState = true;
+            //  Redoスタックをクリアする
+            redoStack.Clear();
+
             Shape sh = null;
             if (currentShape == Shape.RECT)
             {
@@ -60,8 +64,6 @@ namespace Drawing
             sh.SetEndPoint(e.X, e.Y);
             //  図形オブジェクトをリストに追加
             shapeList.Add(sh);
-            //  再描画
-            this.Invalidate();
         }
 
         private void DrawingFm_MouseMove(object sender, MouseEventArgs e)
@@ -85,15 +87,13 @@ namespace Drawing
             drawState = false;
         }
 
-        //  再描画
+        //  描画
         private void draw(MouseEventArgs e)
         {
             //  図形オブジェクトをリストから取り出す
             Shape sh =
                 (Shape)(shapeList[shapeList.Count - 1] as Shape);
             sh.SetEndPoint(e.X, e.Y);
-            //  再描画
-            this.Invalidate();
         }
 
         private void DrawingFm_Paint(object sender, PaintEventArgs e)

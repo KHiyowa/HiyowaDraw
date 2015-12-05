@@ -47,8 +47,8 @@
             this.refreshTm = new System.Windows.Forms.Timer(this.components);
             this.tt = new System.Windows.Forms.ToolTip(this.components);
             this.operateGb = new System.Windows.Forms.GroupBox();
-            this.undoBtn = new System.Windows.Forms.Button();
             this.redoBtn = new System.Windows.Forms.Button();
+            this.undoBtn = new System.Windows.Forms.Button();
             this.drawingGb.SuspendLayout();
             this.ModeGb.SuspendLayout();
             this.attributeGb.SuspendLayout();
@@ -252,24 +252,30 @@
             this.operateGb.TabStop = false;
             this.operateGb.Text = "操作";
             // 
-            // undoBtn
-            // 
-            this.undoBtn.Location = new System.Drawing.Point(6, 18);
-            this.undoBtn.Name = "undoBtn";
-            this.undoBtn.Size = new System.Drawing.Size(49, 50);
-            this.undoBtn.TabIndex = 0;
-            this.undoBtn.Text = "button1";
-            this.undoBtn.UseVisualStyleBackColor = true;
-            this.undoBtn.Click += new System.EventHandler(this.undoBtn_Click);
-            // 
             // redoBtn
             // 
+            this.redoBtn.Enabled = false;
+            this.redoBtn.Font = new System.Drawing.Font("MS UI Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.redoBtn.ForeColor = System.Drawing.Color.Blue;
             this.redoBtn.Location = new System.Drawing.Point(6, 72);
             this.redoBtn.Name = "redoBtn";
-            this.redoBtn.Size = new System.Drawing.Size(49, 50);
+            this.redoBtn.Size = new System.Drawing.Size(50, 50);
             this.redoBtn.TabIndex = 1;
-            this.redoBtn.Text = "button2";
+            this.redoBtn.Text = "→";
             this.redoBtn.UseVisualStyleBackColor = true;
+            this.redoBtn.Click += new System.EventHandler(this.redoBtn_Click);
+            // 
+            // undoBtn
+            // 
+            this.undoBtn.Font = new System.Drawing.Font("MS UI Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.undoBtn.ForeColor = System.Drawing.Color.Blue;
+            this.undoBtn.Location = new System.Drawing.Point(6, 18);
+            this.undoBtn.Name = "undoBtn";
+            this.undoBtn.Size = new System.Drawing.Size(50, 50);
+            this.undoBtn.TabIndex = 0;
+            this.undoBtn.Text = "←";
+            this.undoBtn.UseVisualStyleBackColor = true;
+            this.undoBtn.Click += new System.EventHandler(this.undoBtn_Click);
             // 
             // MenuFm
             // 
