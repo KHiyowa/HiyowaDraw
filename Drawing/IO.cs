@@ -2,6 +2,8 @@
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace Drawing
 {
@@ -68,6 +70,47 @@ namespace Drawing
                 "HiyowaDraw",
                 MessageBoxButtons.YesNoCancel,
             MessageBoxIcon.Question);
+        }
+
+        //  エクスポート
+        private void exportBmp()
+        {
+            //  キャンバスサイズを取得して幅と高さを設定
+            Size canvasSize = getCanvasSize();
+            int w = canvasSize.Width;
+            int h = canvasSize.Height;
+
+            //  保存ダイアログの設定
+            sfd.Filter = "PNG イメージ|*.png|JPEG イメージ|*.jpg";
+            sfd.FileName = fileName;
+
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                //  キャンバスと同サイズのビットマップを作成
+                Bitmap bmp = new Bitmap(w, h);
+                //  グラフィックスオブジェクトを作成
+                Graphics g = Graphics.FromImage(bmp);
+                //  ビットマップに描画
+                foreach (Shape sh in shapeList)
+                {
+                    sh.Draw(g);
+                }
+
+                //  ビットマップを保存
+                if (Path.GetExtension(sfd.FileName).ToLower() == ".png")
+                {
+                    bmp.Save(sfd.FileName, ImageFormat.Png);
+                }
+                else if (Path.GetExtension(sfd.FileName).ToLower() == ".jpg")
+                {
+                    bmp.Save(sfd.FileName, ImageFormat.Jpeg);
+                }
+
+                //  オブジェクトを解放
+                g.Dispose();
+                bmp.Dispose();
+
+            }
         }
 
 

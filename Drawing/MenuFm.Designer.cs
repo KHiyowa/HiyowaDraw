@@ -288,6 +288,7 @@
             this.Controls.Add(this.topMostCb);
             this.Controls.Add(this.ModeGb);
             this.Controls.Add(this.drawingGb);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "MenuFm";
             this.ShowInTaskbar = false;
             this.Text = "メニュー";
