@@ -128,10 +128,10 @@
             // 
             // exportTsmi
             // 
-            this.exportTsmi.Enabled = false;
             this.exportTsmi.Name = "exportTsmi";
             this.exportTsmi.Size = new System.Drawing.Size(184, 22);
             this.exportTsmi.Text = "エクスポート...";
+            this.exportTsmi.Click += new System.EventHandler(this.exportTsmi_Click);
             // 
             // printSubTsmi
             // 

@@ -31,20 +31,29 @@ namespace Drawing
             setCaption();
         }
 
+        //  キャンバスのサイズを取得する
+        private Size getCanvasSize()
+        {
+            return new Size(this.ClientSize.Width, this.ClientSize.Height - commandBarMs.Height);
+        }
+
         //  ステータスバーにキャンバスサイズを表示する
         private void indicateCanvasSize()
         {
-            Size canvasSize = this.ClientSize;
+            Size canvasSize = getCanvasSize();
             canvasXTssl.Text = "X = " + canvasSize.Width.ToString();
-            canvasYTssl.Text = "Y = " + (canvasSize.Height - commandBarMs.Height).ToString();
+            canvasYTssl.Text = "Y = " + canvasSize.Height.ToString();
         }
 
+        //  元に戻す
         public static void undo()
         {
             if (shapeList.Count == 0) { return; }
             redoStack.Push(shapeList[shapeList.Count - 1]);
             shapeList.RemoveAt(shapeList.Count - 1);
         }
+
+        //  やり直し
         public static void redo()
         {
             shapeList.Add(redoStack.Pop());

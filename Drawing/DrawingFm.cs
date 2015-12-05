@@ -153,5 +153,12 @@ namespace Drawing
         {
             this.Invalidate();
         }
+
+        private void exportTsmi_Click(object sender, EventArgs e)
+        {
+            menu.Hide();
+            exportBmp();
+            menu.Hide();
+        }
     }
 }
