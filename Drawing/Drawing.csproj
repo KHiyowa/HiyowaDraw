@@ -110,6 +110,18 @@
   <ItemGroup>
     <None Include="Resources\eraser.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\redoEnabled.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\undoEnabled.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\redoDisabled.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\undoDisabled.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

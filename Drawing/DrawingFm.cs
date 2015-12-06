@@ -17,6 +17,13 @@ namespace Drawing
         {
             InitializeComponent();
 
+            //  デフォルトの図形と色を設定
+            currentMode = Mode.DRAW;
+            currentShape = Shape.RECT;
+            currentEdgeColor = Color.Black;
+            currentFillColor = Color.Blue;
+            shapeFilled = true;
+            lineWidth = 2;
             //  新しいキャンバスを作成
             newCanvas();
         }
