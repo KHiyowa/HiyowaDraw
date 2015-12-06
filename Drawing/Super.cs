@@ -16,14 +16,16 @@ namespace Drawing
             public static int OVAL = 1;
             public static int LINE = 2;
             protected int x1, y1, x2, y2;
-            protected Color c;
+            protected Color ec;
+            protected Color fc;
             protected int w;
 
             abstract public void Draw(Graphics g);
 
-            public void SetColor(Color c)
+            public void SetColor(Color ec, Color fc)
             {
-                this.c = c;
+                this.ec = ec;
+                this.fc = fc;
             }
             public void SetWidth(int w)
             {
@@ -44,7 +46,7 @@ namespace Drawing
         {
             public override void Draw(Graphics g)
             {
-                Pen p = new Pen(c, w);
+                Pen p = new Pen(ec, w);
                 g.DrawRectangle(p, x1, y1, x2 - x1, y2 - y1);
             }
         }
@@ -54,8 +56,10 @@ namespace Drawing
         {
             public override void Draw(Graphics g)
             {
-                SolidBrush sb = new SolidBrush(c);
+                SolidBrush sb = new SolidBrush(fc);
+                Pen p = new Pen(ec, w);
                 g.FillRectangle(sb, x1, y1, x2 - x1, y2 - y1);
+                g.DrawRectangle(p, x1, y1, x2 - x1, y2 - y1);
             }
         }
 
@@ -64,7 +68,7 @@ namespace Drawing
         {
             public override void Draw(Graphics g)
             {
-                Pen p = new Pen(c, w);
+                Pen p = new Pen(ec, w);
                 g.DrawEllipse(p, x1, y1, x2 - x1, y2 - y1);
             }
         }
@@ -74,8 +78,10 @@ namespace Drawing
         {
             public override void Draw(Graphics g)
             {
-                SolidBrush sb = new SolidBrush(c);
+                SolidBrush sb = new SolidBrush(fc);
+                Pen p = new Pen(ec, w);
                 g.FillEllipse(sb, x1, y1, x2 - x1, y2 - y1);
+                g.DrawEllipse(p, x1, y1, x2 - x1, y2 - y1);
             }
         }
 
@@ -84,7 +90,7 @@ namespace Drawing
         {
             public override void Draw(Graphics g)
             {
-                Pen p = new Pen(c, w);
+                Pen p = new Pen(ec, w);
                 g.DrawLine(p, x1, y1, x2, y2);
             }
         }

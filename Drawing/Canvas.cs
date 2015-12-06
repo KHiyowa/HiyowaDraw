@@ -18,7 +18,8 @@ namespace Drawing
             redoStack = new Stack<Shape>();
             //  デフォルトの図形と色を設定
             currentShape = Shape.RECT;
-            currentColor = Color.Blue;
+            currentEdgeColor = Color.Blue;
+            currentFillColor = currentEdgeColor;
             shapeFilled = true;
             lineWidth = 2;
 
@@ -58,6 +59,7 @@ namespace Drawing
         //  やり直し
         public void redo()
         {
+            if (redoStack.Count == 0) { return; }
             shapeList.Add(redoStack.Pop());
             this.Invalidate();
         }
