@@ -12,9 +12,12 @@ namespace Drawing
 {
     public partial class MenuFm : Form
     {
-        public MenuFm()
+        DrawingFm df;
+        public MenuFm(DrawingFm df)
         {
             InitializeComponent();
+
+            this.df = df;
         }
 
         private void topMostCb_CheckedChanged(object sender, EventArgs e)
@@ -136,12 +139,12 @@ namespace Drawing
 
         private void undoBtn_Click(object sender, EventArgs e)
         {
-            DrawingFm.undo();
+            df.undo();
         }
 
         private void redoBtn_Click(object sender, EventArgs e)
         {
-            DrawingFm.redo();
+            df.redo();
         }
     }
 }

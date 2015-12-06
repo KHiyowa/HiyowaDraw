@@ -64,6 +64,8 @@ namespace Drawing
             sh.SetEndPoint(e.X, e.Y);
             //  図形オブジェクトをリストに追加
             shapeList.Add(sh);
+            //  再描画
+            draw(e);
         }
 
         private void DrawingFm_MouseMove(object sender, MouseEventArgs e)
@@ -94,6 +96,8 @@ namespace Drawing
             Shape sh =
                 (Shape)(shapeList[shapeList.Count - 1] as Shape);
             sh.SetEndPoint(e.X, e.Y);
+            //  再描画
+            this.Invalidate();
         }
 
         private void DrawingFm_Paint(object sender, PaintEventArgs e)
