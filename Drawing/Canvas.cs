@@ -28,6 +28,7 @@ namespace Drawing
             fileName = null;
 
             //  再描画
+            this.Invalidate();
             setCaption();
         }
 
@@ -46,17 +47,19 @@ namespace Drawing
         }
 
         //  元に戻す
-        public static void undo()
+        public void undo()
         {
             if (shapeList.Count == 0) { return; }
             redoStack.Push(shapeList[shapeList.Count - 1]);
             shapeList.RemoveAt(shapeList.Count - 1);
+            this.Invalidate();
         }
 
         //  やり直し
-        public static void redo()
+        public void redo()
         {
             shapeList.Add(redoStack.Pop());
+            this.Invalidate();
         }
     }
 }

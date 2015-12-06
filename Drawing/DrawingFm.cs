@@ -11,7 +11,7 @@ namespace Drawing
     public partial class DrawingFm : Form
     {
         public static string fileName;
-        public Form menu = new MenuFm();
+        public Form menu;
 
         public DrawingFm()
         {
@@ -24,6 +24,7 @@ namespace Drawing
         //  フォームを開くとき
         private void DrawingFm_Load(object sender, System.EventArgs e)
         {
+            menu = new MenuFm(this);
             menu.Show();
             setCaption();
             indicateCanvasSize();
@@ -147,11 +148,6 @@ namespace Drawing
             }
             newCanvas();
             menu.Show();
-        }
-
-        private void invalidateTm_Tick(object sender, EventArgs e)
-        {
-            this.Invalidate();
         }
 
         private void exportTsmi_Click(object sender, EventArgs e)
