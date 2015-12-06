@@ -16,13 +16,6 @@ namespace Drawing
             //  リストを初期化
             shapeList = new List<Shape>();
             redoStack = new Stack<Shape>();
-            //  デフォルトの図形と色を設定
-            currentMode = Mode.DRAW;
-            currentShape = Shape.RECT;
-            currentEdgeColor = Color.Blue;
-            currentFillColor = currentEdgeColor;
-            shapeFilled = true;
-            lineWidth = 2;
 
             //  保存状態をクリア
             savedState = true;
