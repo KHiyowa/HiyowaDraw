@@ -35,8 +35,6 @@
             this.ovalBtn = new System.Windows.Forms.RadioButton();
             this.rectBtn = new System.Windows.Forms.RadioButton();
             this.ModeGb = new System.Windows.Forms.GroupBox();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.drawBtn = new System.Windows.Forms.RadioButton();
             this.topMostCb = new System.Windows.Forms.CheckBox();
             this.attributeGb = new System.Windows.Forms.GroupBox();
             this.fillBtn = new System.Windows.Forms.CheckBox();
@@ -47,9 +45,11 @@
             this.tt = new System.Windows.Forms.ToolTip(this.components);
             this.edgeColorBtn = new System.Windows.Forms.Button();
             this.operateGb = new System.Windows.Forms.GroupBox();
-            this.redoBtn = new System.Windows.Forms.Button();
-            this.undoBtn = new System.Windows.Forms.Button();
             this.colorGb = new System.Windows.Forms.GroupBox();
+            this.undoBtn = new System.Windows.Forms.Button();
+            this.redoBtn = new System.Windows.Forms.Button();
+            this.eraseBtn = new System.Windows.Forms.RadioButton();
+            this.drawBtn = new System.Windows.Forms.RadioButton();
             this.drawingGb.SuspendLayout();
             this.ModeGb.SuspendLayout();
             this.attributeGb.SuspendLayout();
@@ -119,7 +119,7 @@
             // 
             // ModeGb
             // 
-            this.ModeGb.Controls.Add(this.radioButton1);
+            this.ModeGb.Controls.Add(this.eraseBtn);
             this.ModeGb.Controls.Add(this.drawBtn);
             this.ModeGb.Location = new System.Drawing.Point(79, 12);
             this.ModeGb.Name = "ModeGb";
@@ -127,40 +127,6 @@
             this.ModeGb.TabIndex = 1;
             this.ModeGb.TabStop = false;
             this.ModeGb.Text = "モード";
-            // 
-            // radioButton1
-            // 
-            this.radioButton1.Appearance = System.Windows.Forms.Appearance.Button;
-            this.radioButton1.Enabled = false;
-            this.radioButton1.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.radioButton1.Font = new System.Drawing.Font("MS UI Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.radioButton1.Image = ((System.Drawing.Image)(resources.GetObject("radioButton1.Image")));
-            this.radioButton1.Location = new System.Drawing.Point(6, 74);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(50, 50);
-            this.radioButton1.TabIndex = 1;
-            this.radioButton1.Text = "消";
-            this.radioButton1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.tt.SetToolTip(this.radioButton1, "消去します");
-            this.radioButton1.UseVisualStyleBackColor = true;
-            // 
-            // drawBtn
-            // 
-            this.drawBtn.Appearance = System.Windows.Forms.Appearance.Button;
-            this.drawBtn.Checked = true;
-            this.drawBtn.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.drawBtn.Font = new System.Drawing.Font("MS UI Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.drawBtn.Image = global::Drawing.Properties.Resources.pencil;
-            this.drawBtn.Location = new System.Drawing.Point(6, 18);
-            this.drawBtn.Name = "drawBtn";
-            this.drawBtn.Size = new System.Drawing.Size(50, 50);
-            this.drawBtn.TabIndex = 0;
-            this.drawBtn.TabStop = true;
-            this.drawBtn.Text = "描";
-            this.drawBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.drawBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.tt.SetToolTip(this.drawBtn, "描画します");
-            this.drawBtn.UseVisualStyleBackColor = true;
             // 
             // topMostCb
             // 
@@ -263,31 +229,6 @@
             this.operateGb.TabStop = false;
             this.operateGb.Text = "操作";
             // 
-            // redoBtn
-            // 
-            this.redoBtn.Enabled = false;
-            this.redoBtn.Font = new System.Drawing.Font("MS UI Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.redoBtn.ForeColor = System.Drawing.Color.Blue;
-            this.redoBtn.Location = new System.Drawing.Point(6, 72);
-            this.redoBtn.Name = "redoBtn";
-            this.redoBtn.Size = new System.Drawing.Size(50, 50);
-            this.redoBtn.TabIndex = 1;
-            this.redoBtn.Text = "→";
-            this.redoBtn.UseVisualStyleBackColor = true;
-            this.redoBtn.Click += new System.EventHandler(this.redoBtn_Click);
-            // 
-            // undoBtn
-            // 
-            this.undoBtn.Font = new System.Drawing.Font("MS UI Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.undoBtn.ForeColor = System.Drawing.Color.Blue;
-            this.undoBtn.Location = new System.Drawing.Point(6, 18);
-            this.undoBtn.Name = "undoBtn";
-            this.undoBtn.Size = new System.Drawing.Size(50, 50);
-            this.undoBtn.TabIndex = 0;
-            this.undoBtn.Text = "←";
-            this.undoBtn.UseVisualStyleBackColor = true;
-            this.undoBtn.Click += new System.EventHandler(this.undoBtn_Click);
-            // 
             // colorGb
             // 
             this.colorGb.Controls.Add(this.edgeColorBtn);
@@ -298,6 +239,67 @@
             this.colorGb.TabIndex = 6;
             this.colorGb.TabStop = false;
             this.colorGb.Text = "色";
+            // 
+            // undoBtn
+            // 
+            this.undoBtn.BackgroundImage = global::Drawing.Properties.Resources.undoDisabled;
+            this.undoBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.undoBtn.Font = new System.Drawing.Font("MS UI Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.undoBtn.ForeColor = System.Drawing.Color.Blue;
+            this.undoBtn.Location = new System.Drawing.Point(6, 18);
+            this.undoBtn.Name = "undoBtn";
+            this.undoBtn.Size = new System.Drawing.Size(50, 50);
+            this.undoBtn.TabIndex = 0;
+            this.undoBtn.UseVisualStyleBackColor = true;
+            this.undoBtn.Click += new System.EventHandler(this.undoBtn_Click);
+            // 
+            // redoBtn
+            // 
+            this.redoBtn.BackgroundImage = global::Drawing.Properties.Resources.redoDisabled;
+            this.redoBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.redoBtn.Enabled = false;
+            this.redoBtn.Font = new System.Drawing.Font("MS UI Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.redoBtn.ForeColor = System.Drawing.Color.Blue;
+            this.redoBtn.Location = new System.Drawing.Point(6, 72);
+            this.redoBtn.Name = "redoBtn";
+            this.redoBtn.Size = new System.Drawing.Size(50, 50);
+            this.redoBtn.TabIndex = 1;
+            this.redoBtn.UseVisualStyleBackColor = true;
+            this.redoBtn.Click += new System.EventHandler(this.redoBtn_Click);
+            // 
+            // eraseBtn
+            // 
+            this.eraseBtn.Appearance = System.Windows.Forms.Appearance.Button;
+            this.eraseBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("eraseBtn.BackgroundImage")));
+            this.eraseBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.eraseBtn.Enabled = false;
+            this.eraseBtn.Font = new System.Drawing.Font("MS UI Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.eraseBtn.Location = new System.Drawing.Point(6, 74);
+            this.eraseBtn.Name = "eraseBtn";
+            this.eraseBtn.Size = new System.Drawing.Size(50, 50);
+            this.eraseBtn.TabIndex = 1;
+            this.eraseBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.tt.SetToolTip(this.eraseBtn, "消去します");
+            this.eraseBtn.UseVisualStyleBackColor = true;
+            this.eraseBtn.Click += new System.EventHandler(this.eraseBtn_Click);
+            // 
+            // drawBtn
+            // 
+            this.drawBtn.Appearance = System.Windows.Forms.Appearance.Button;
+            this.drawBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("drawBtn.BackgroundImage")));
+            this.drawBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.drawBtn.Checked = true;
+            this.drawBtn.Font = new System.Drawing.Font("MS UI Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.drawBtn.Location = new System.Drawing.Point(6, 18);
+            this.drawBtn.Name = "drawBtn";
+            this.drawBtn.Size = new System.Drawing.Size(50, 50);
+            this.drawBtn.TabIndex = 0;
+            this.drawBtn.TabStop = true;
+            this.drawBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.drawBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.tt.SetToolTip(this.drawBtn, "描画します");
+            this.drawBtn.UseVisualStyleBackColor = true;
+            this.drawBtn.Click += new System.EventHandler(this.drawBtn_Click);
             // 
             // MenuFm
             // 
@@ -333,7 +335,7 @@
         private System.Windows.Forms.GroupBox drawingGb;
         private System.Windows.Forms.GroupBox ModeGb;
         private System.Windows.Forms.RadioButton drawBtn;
-        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton eraseBtn;
         private System.Windows.Forms.CheckBox topMostCb;
         public System.Windows.Forms.RadioButton lineBtn;
         public System.Windows.Forms.RadioButton ovalBtn;

@@ -86,6 +86,18 @@ namespace Drawing
             pd.Print();
         }
 
+        //  元に戻す
+        private void undoTsmi_Click(object sender, EventArgs e)
+        {
+            undo();
+        }
+
+        //  やり直し
+        private void redoTsmi_Click(object sender, EventArgs e)
+        {
+            redo();
+        }
+
         //  四角
         private void rectTsmi_Click(object sender, EventArgs e)
         {

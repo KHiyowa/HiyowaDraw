@@ -17,6 +17,7 @@ namespace Drawing
             shapeList = new List<Shape>();
             redoStack = new Stack<Shape>();
             //  デフォルトの図形と色を設定
+            currentMode = Mode.DRAW;
             currentShape = Shape.RECT;
             currentEdgeColor = Color.Blue;
             currentFillColor = currentEdgeColor;
@@ -36,7 +37,8 @@ namespace Drawing
         //  キャンバスのサイズを取得する
         private Size getCanvasSize()
         {
-            return new Size(this.ClientSize.Width, this.ClientSize.Height - commandBarMs.Height);
+            return new Size(this.ClientSize.Width, 
+                this.ClientSize.Height - commandBarMs.Height - statusBarSs.Height);
         }
 
         //  ステータスバーにキャンバスサイズを表示する
