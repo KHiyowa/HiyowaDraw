@@ -105,11 +105,18 @@ namespace Drawing
         }
 
         //  色設定
-        private void colorTsmi_Click(object sender, EventArgs e)
+        private void edgeColorTsmi_Click(object sender, EventArgs e)
         {
             if (cd.ShowDialog() == DialogResult.OK)
             {
-                currentColor = cd.Color;
+                currentEdgeColor = cd.Color;
+            }
+        }
+        private void fillColorTsmi_Click(object sender, EventArgs e)
+        {
+            if (cd.ShowDialog() == DialogResult.OK)
+            {
+                currentFillColor = cd.Color;
             }
         }
 

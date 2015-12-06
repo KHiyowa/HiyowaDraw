@@ -33,17 +33,17 @@ namespace Drawing
         }
         private void rectBtn_CheckedChanged(object sender, EventArgs e)
         {
-            DrawingFm.currentShape = DrawingFm.Shape.RECT;
+            df.currentShape = DrawingFm.Shape.RECT;
         }
 
         private void ovalBtn_CheckedChanged(object sender, EventArgs e)
         {
-            DrawingFm.currentShape = DrawingFm.Shape.OVAL;
+            df.currentShape = DrawingFm.Shape.OVAL;
         }
 
         private void lineBtn_CheckedChanged(object sender, EventArgs e)
         {
-            DrawingFm.currentShape = DrawingFm.Shape.LINE;
+            df.currentShape = DrawingFm.Shape.LINE;
         }
 
         //  フロートメニューの情報の更新
@@ -69,56 +69,59 @@ namespace Drawing
                 redoBtn.Enabled = false;
             }
             //  塗りつぶしの状態を反映
-            fillBtn.Checked = DrawingFm.shapeFilled;
-            if (DrawingFm.shapeFilled)
+            fillBtn.Checked = df.shapeFilled;
+            if (df.shapeFilled)
             {
                 rectBtn.Text = "■";
+                ovalBtn.Text = "●";
+                fillColorBtn.Visible = true;
             }
             else
             {
                 rectBtn.Text = "□";
-            }
-            if (DrawingFm.shapeFilled)
-            {
-                ovalBtn.Text = "●";
-            }
-            else
-            {
                 ovalBtn.Text = "○";
+                fillColorBtn.Visible = false;
             }
 
             //  現在選択されている図形の反映
-            if (DrawingFm.currentShape == DrawingFm.Shape.RECT)
+            if (df.currentShape == DrawingFm.Shape.RECT)
             {
                 rectBtn.Checked = true;
                 fillBtn.Text = rectBtn.Text;
-                fillBtn.Enabled = true;
+                fillBtn.Visible = true;
             }
-            else if (DrawingFm.currentShape == DrawingFm.Shape.OVAL)
+            else if (df.currentShape == DrawingFm.Shape.OVAL)
             {
                 ovalBtn.Checked = true;
                 fillBtn.Text = ovalBtn.Text;
-                fillBtn.Enabled = true;
+                fillBtn.Visible = true;
             }
-            else if (DrawingFm.currentShape == DrawingFm.Shape.LINE)
+            else if (df.currentShape == DrawingFm.Shape.LINE)
             {
                 lineBtn.Checked = true;
-                fillBtn.Enabled = false;
-                fillBtn.Text = "";
+                fillBtn.Visible = false;
             }
 
             //  現在選択されている色の反映
-            colorBtn.BackColor = DrawingFm.currentColor;
+            edgeColorBtn.BackColor = df.currentEdgeColor;
+            fillColorBtn.BackColor = df.currentFillColor;
 
             //  線の太さを反映
-            lineWidthNud.Value = DrawingFm.lineWidth;
+            lineWidthNud.Value = df.lineWidth;
         }
 
-        private void colorBtn_Click(object sender, EventArgs e)
+        private void edgeColorBtn_Click(object sender, EventArgs e)
         {
-            if (cd.ShowDialog() == DialogResult.OK)
+            if (df.cd.ShowDialog() == DialogResult.OK)
             {
-                DrawingFm.currentColor = cd.Color;
+                df.currentEdgeColor = df.cd.Color;
+            }
+        }
+        private void fillColorBtn_Click(object sender, EventArgs e)
+        {
+            if (df.cd.ShowDialog() == DialogResult.OK)
+            {
+                df.currentFillColor = df.cd.Color;
             }
         }
 
@@ -129,12 +132,12 @@ namespace Drawing
 
         private void lineWidthNud_ValueChanged(object sender, EventArgs e)
         {
-            DrawingFm.lineWidth = Decimal.ToInt32(lineWidthNud.Value);
+            df.lineWidth = Decimal.ToInt32(lineWidthNud.Value);
         }
 
         private void fillBtn_CheckedChanged(object sender, EventArgs e)
         {
-            DrawingFm.shapeFilled = fillBtn.Checked;
+            df.shapeFilled = fillBtn.Checked;
         }
 
         private void undoBtn_Click(object sender, EventArgs e)

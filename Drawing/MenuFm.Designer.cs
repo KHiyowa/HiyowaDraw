@@ -42,18 +42,20 @@
             this.fillBtn = new System.Windows.Forms.CheckBox();
             this.lineWidthLb = new System.Windows.Forms.Label();
             this.lineWidthNud = new System.Windows.Forms.NumericUpDown();
-            this.colorBtn = new System.Windows.Forms.Button();
-            this.cd = new System.Windows.Forms.ColorDialog();
+            this.fillColorBtn = new System.Windows.Forms.Button();
             this.refreshTm = new System.Windows.Forms.Timer(this.components);
             this.tt = new System.Windows.Forms.ToolTip(this.components);
+            this.edgeColorBtn = new System.Windows.Forms.Button();
             this.operateGb = new System.Windows.Forms.GroupBox();
             this.redoBtn = new System.Windows.Forms.Button();
             this.undoBtn = new System.Windows.Forms.Button();
+            this.colorGb = new System.Windows.Forms.GroupBox();
             this.drawingGb.SuspendLayout();
             this.ModeGb.SuspendLayout();
             this.attributeGb.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lineWidthNud)).BeginInit();
             this.operateGb.SuspendLayout();
+            this.colorGb.SuspendLayout();
             this.SuspendLayout();
             // 
             // drawingGb
@@ -148,7 +150,7 @@
             this.drawBtn.Checked = true;
             this.drawBtn.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.drawBtn.Font = new System.Drawing.Font("MS UI Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.drawBtn.Image = ((System.Drawing.Image)(resources.GetObject("drawBtn.Image")));
+            this.drawBtn.Image = global::Drawing.Properties.Resources.pencil;
             this.drawBtn.Location = new System.Drawing.Point(6, 18);
             this.drawBtn.Name = "drawBtn";
             this.drawBtn.Size = new System.Drawing.Size(50, 50);
@@ -165,7 +167,7 @@
             this.topMostCb.AutoSize = true;
             this.topMostCb.Checked = true;
             this.topMostCb.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.topMostCb.Location = new System.Drawing.Point(18, 147);
+            this.topMostCb.Location = new System.Drawing.Point(12, 146);
             this.topMostCb.Name = "topMostCb";
             this.topMostCb.Size = new System.Drawing.Size(102, 16);
             this.topMostCb.TabIndex = 2;
@@ -178,10 +180,9 @@
             this.attributeGb.Controls.Add(this.fillBtn);
             this.attributeGb.Controls.Add(this.lineWidthLb);
             this.attributeGb.Controls.Add(this.lineWidthNud);
-            this.attributeGb.Controls.Add(this.colorBtn);
             this.attributeGb.Location = new System.Drawing.Point(275, 12);
             this.attributeGb.Name = "attributeGb";
-            this.attributeGb.Size = new System.Drawing.Size(122, 128);
+            this.attributeGb.Size = new System.Drawing.Size(65, 128);
             this.attributeGb.TabIndex = 3;
             this.attributeGb.TabStop = false;
             this.attributeGb.Text = "属性";
@@ -192,7 +193,7 @@
             this.fillBtn.Checked = true;
             this.fillBtn.CheckState = System.Windows.Forms.CheckState.Checked;
             this.fillBtn.Font = new System.Drawing.Font("MS UI Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.fillBtn.Location = new System.Drawing.Point(64, 16);
+            this.fillBtn.Location = new System.Drawing.Point(8, 18);
             this.fillBtn.Name = "fillBtn";
             this.fillBtn.Size = new System.Drawing.Size(50, 50);
             this.fillBtn.TabIndex = 7;
@@ -225,21 +226,31 @@
             0});
             this.lineWidthNud.ValueChanged += new System.EventHandler(this.lineWidthNud_ValueChanged);
             // 
-            // colorBtn
+            // fillColorBtn
             // 
-            this.colorBtn.Location = new System.Drawing.Point(8, 16);
-            this.colorBtn.Name = "colorBtn";
-            this.colorBtn.Size = new System.Drawing.Size(50, 50);
-            this.colorBtn.TabIndex = 5;
-            this.tt.SetToolTip(this.colorBtn, "色を変更します");
-            this.colorBtn.UseVisualStyleBackColor = true;
-            this.colorBtn.Click += new System.EventHandler(this.colorBtn_Click);
+            this.fillColorBtn.Location = new System.Drawing.Point(6, 74);
+            this.fillColorBtn.Name = "fillColorBtn";
+            this.fillColorBtn.Size = new System.Drawing.Size(50, 50);
+            this.fillColorBtn.TabIndex = 5;
+            this.tt.SetToolTip(this.fillColorBtn, "塗りつぶしの色を変更します");
+            this.fillColorBtn.UseVisualStyleBackColor = true;
+            this.fillColorBtn.Click += new System.EventHandler(this.fillColorBtn_Click);
             // 
             // refreshTm
             // 
             this.refreshTm.Enabled = true;
             this.refreshTm.Interval = 1000;
             this.refreshTm.Tick += new System.EventHandler(this.refreshTm_Tick);
+            // 
+            // edgeColorBtn
+            // 
+            this.edgeColorBtn.Location = new System.Drawing.Point(6, 18);
+            this.edgeColorBtn.Name = "edgeColorBtn";
+            this.edgeColorBtn.Size = new System.Drawing.Size(50, 50);
+            this.edgeColorBtn.TabIndex = 6;
+            this.tt.SetToolTip(this.edgeColorBtn, "輪郭の色を変更します");
+            this.edgeColorBtn.UseVisualStyleBackColor = true;
+            this.edgeColorBtn.Click += new System.EventHandler(this.edgeColorBtn_Click);
             // 
             // operateGb
             // 
@@ -277,12 +288,24 @@
             this.undoBtn.UseVisualStyleBackColor = true;
             this.undoBtn.Click += new System.EventHandler(this.undoBtn_Click);
             // 
+            // colorGb
+            // 
+            this.colorGb.Controls.Add(this.edgeColorBtn);
+            this.colorGb.Controls.Add(this.fillColorBtn);
+            this.colorGb.Location = new System.Drawing.Point(346, 12);
+            this.colorGb.Name = "colorGb";
+            this.colorGb.Size = new System.Drawing.Size(65, 128);
+            this.colorGb.TabIndex = 6;
+            this.colorGb.TabStop = false;
+            this.colorGb.Text = "色";
+            // 
             // MenuFm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(409, 171);
+            this.ClientSize = new System.Drawing.Size(423, 167);
             this.ControlBox = false;
+            this.Controls.Add(this.colorGb);
             this.Controls.Add(this.operateGb);
             this.Controls.Add(this.attributeGb);
             this.Controls.Add(this.topMostCb);
@@ -299,6 +322,7 @@
             this.attributeGb.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lineWidthNud)).EndInit();
             this.operateGb.ResumeLayout(false);
+            this.colorGb.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -315,8 +339,7 @@
         public System.Windows.Forms.RadioButton ovalBtn;
         public System.Windows.Forms.RadioButton rectBtn;
         private System.Windows.Forms.GroupBox attributeGb;
-        private System.Windows.Forms.Button colorBtn;
-        private System.Windows.Forms.ColorDialog cd;
+        private System.Windows.Forms.Button fillColorBtn;
         private System.Windows.Forms.Timer refreshTm;
         private System.Windows.Forms.Label lineWidthLb;
         private System.Windows.Forms.NumericUpDown lineWidthNud;
@@ -325,5 +348,7 @@
         private System.Windows.Forms.GroupBox operateGb;
         private System.Windows.Forms.Button redoBtn;
         private System.Windows.Forms.Button undoBtn;
+        private System.Windows.Forms.GroupBox colorGb;
+        private System.Windows.Forms.Button edgeColorBtn;
     }
 }

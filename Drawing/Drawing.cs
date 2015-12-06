@@ -6,12 +6,13 @@ namespace Drawing
 {
     public partial class DrawingFm
     {
-        public static int currentMode;
-        public static int currentShape;
-        public static bool shapeFilled;
-        public static int lineWidth;
-        public static Color currentColor;
-        public static bool drawState = false;
+        public int currentMode;
+        public int currentShape;
+        public bool shapeFilled;
+        public int lineWidth;
+        public Color currentEdgeColor;
+        public Color currentFillColor;
+        public bool drawState = false;
 
         public class Mode
         {
@@ -56,7 +57,7 @@ namespace Drawing
                 sh = new Line();
             }
             //  図形オブジェクトの色を設定
-            sh.SetColor(currentColor);
+            sh.SetColor(currentEdgeColor, currentFillColor);
             //  線の太さを設定
             sh.SetWidth(lineWidth);
             //  図形オブジェクトの座標を設定
