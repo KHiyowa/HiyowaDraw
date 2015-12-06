@@ -78,19 +78,23 @@ namespace Drawing
             if (DrawingFm.shapeList.Count != 0)
             {
                 undoBtn.Enabled = true;
+                undoBtn.BackgroundImage = Properties.Resources.undoEnabled;
             }
             else
             {
                 undoBtn.Enabled = false;
+                undoBtn.BackgroundImage = Properties.Resources.undoDisabled;
             }
             //  Redoの可否を反映
             if (DrawingFm.redoStack.Count != 0)
             {
                 redoBtn.Enabled = true;
+                redoBtn.BackgroundImage = Properties.Resources.redoEnabled;
             }
             else
             {
                 redoBtn.Enabled = false;
+                redoBtn.BackgroundImage = Properties.Resources.redoDisabled;
             }
 
             //  モード選択の反映
