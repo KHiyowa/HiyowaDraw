@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -14,10 +15,29 @@ namespace Drawing
         public Color currentFillColor;
         public bool drawState = false;
 
-        public class Mode
+        abstract public class Mode
         {
-            public static int DRAW = 0;
-            public static int ERASE = 1;
+            public static int NONE = 0;
+            public static int DRAW = 1;
+            public static int ERASE = 2;
+        }
+
+        public void changeMode(int mode)
+        {
+            currentMode = mode;
+            if (mode == Mode.NONE)
+            {
+                modeTssl.Text = "選択モード";
+            }
+            if (mode == Mode.DRAW)
+            {
+                modeTssl.Text = "描画モード";
+            }
+            if (mode == Mode.ERASE)
+            {
+                modeTssl.Text = "消去モード";
+            }
+            
         }
 
         public void DrawingFm_MouseDown(object sender, MouseEventArgs e)

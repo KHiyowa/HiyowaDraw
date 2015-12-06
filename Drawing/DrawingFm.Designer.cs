@@ -37,14 +37,13 @@
             this.saveAsTsmi = new System.Windows.Forms.ToolStripMenuItem();
             this.exportTsmi = new System.Windows.Forms.ToolStripMenuItem();
             this.printTss = new System.Windows.Forms.ToolStripSeparator();
-            this.printSubTsmi = new System.Windows.Forms.ToolStripMenuItem();
-            this.printTsmi = new System.Windows.Forms.ToolStripMenuItem();
             this.printPreviewTsmi = new System.Windows.Forms.ToolStripMenuItem();
+            this.printTsmi = new System.Windows.Forms.ToolStripMenuItem();
             this.systemTss = new System.Windows.Forms.ToolStripSeparator();
             this.quitTsmi = new System.Windows.Forms.ToolStripMenuItem();
-            this.編集ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.元に戻すToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.やり直しToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editTsmi = new System.Windows.Forms.ToolStripMenuItem();
+            this.undoTsmi = new System.Windows.Forms.ToolStripMenuItem();
+            this.redoTsmi = new System.Windows.Forms.ToolStripMenuItem();
             this.optionTsmi = new System.Windows.Forms.ToolStripMenuItem();
             this.modeTsmi = new System.Windows.Forms.ToolStripMenuItem();
             this.drawTsmi = new System.Windows.Forms.ToolStripMenuItem();
@@ -64,6 +63,7 @@
             this.sfd = new System.Windows.Forms.SaveFileDialog();
             this.cd = new System.Windows.Forms.ColorDialog();
             this.statusBarSs = new System.Windows.Forms.StatusStrip();
+            this.modeTssl = new System.Windows.Forms.ToolStripStatusLabel();
             this.canvasTssl = new System.Windows.Forms.ToolStripStatusLabel();
             this.canvasXTssl = new System.Windows.Forms.ToolStripStatusLabel();
             this.canvasYTssl = new System.Windows.Forms.ToolStripStatusLabel();
@@ -78,7 +78,7 @@
             // 
             this.commandBarMs.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileTsmi,
-            this.編集ToolStripMenuItem,
+            this.editTsmi,
             this.optionTsmi,
             this.helpTsmi});
             this.commandBarMs.Location = new System.Drawing.Point(0, 0);
@@ -96,7 +96,8 @@
             this.saveAsTsmi,
             this.exportTsmi,
             this.printTss,
-            this.printSubTsmi,
+            this.printPreviewTsmi,
+            this.printTsmi,
             this.systemTss,
             this.quitTsmi});
             this.fileTsmi.Name = "fileTsmi";
@@ -121,7 +122,7 @@
             // saveTsmi
             // 
             this.saveTsmi.Name = "saveTsmi";
-            this.saveTsmi.ShortcutKeyDisplayString = "Ctrl + S";
+            this.saveTsmi.ShortcutKeyDisplayString = "";
             this.saveTsmi.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
             this.saveTsmi.Size = new System.Drawing.Size(184, 22);
             this.saveTsmi.Text = "保存";
@@ -146,31 +147,21 @@
             this.printTss.Name = "printTss";
             this.printTss.Size = new System.Drawing.Size(181, 6);
             // 
-            // printSubTsmi
+            // printPreviewTsmi
             // 
-            this.printSubTsmi.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.printTsmi,
-            this.printPreviewTsmi});
-            this.printSubTsmi.Name = "printSubTsmi";
-            this.printSubTsmi.ShortcutKeyDisplayString = "";
-            this.printSubTsmi.Size = new System.Drawing.Size(184, 22);
-            this.printSubTsmi.Text = "印刷";
+            this.printPreviewTsmi.Name = "printPreviewTsmi";
+            this.printPreviewTsmi.Size = new System.Drawing.Size(184, 22);
+            this.printPreviewTsmi.Text = "印刷プレビュー";
+            this.printPreviewTsmi.Click += new System.EventHandler(this.printPreviewTsmi_Click);
             // 
             // printTsmi
             // 
             this.printTsmi.Name = "printTsmi";
-            this.printTsmi.ShortcutKeyDisplayString = "Ctrl + P";
+            this.printTsmi.ShortcutKeyDisplayString = "";
             this.printTsmi.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-            this.printTsmi.Size = new System.Drawing.Size(166, 22);
+            this.printTsmi.Size = new System.Drawing.Size(184, 22);
             this.printTsmi.Text = "印刷...";
             this.printTsmi.Click += new System.EventHandler(this.printTsmi_Click);
-            // 
-            // printPreviewTsmi
-            // 
-            this.printPreviewTsmi.Name = "printPreviewTsmi";
-            this.printPreviewTsmi.Size = new System.Drawing.Size(166, 22);
-            this.printPreviewTsmi.Text = "印刷プレビュー";
-            this.printPreviewTsmi.Click += new System.EventHandler(this.printPreviewTsmi_Click);
             // 
             // systemTss
             // 
@@ -184,29 +175,31 @@
             this.quitTsmi.Text = "終了";
             this.quitTsmi.Click += new System.EventHandler(this.quitTsmi_Click);
             // 
-            // 編集ToolStripMenuItem
+            // editTsmi
             // 
-            this.編集ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.元に戻すToolStripMenuItem,
-            this.やり直しToolStripMenuItem});
-            this.編集ToolStripMenuItem.Name = "編集ToolStripMenuItem";
-            this.編集ToolStripMenuItem.Size = new System.Drawing.Size(44, 22);
-            this.編集ToolStripMenuItem.Text = "編集";
+            this.editTsmi.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.undoTsmi,
+            this.redoTsmi});
+            this.editTsmi.Name = "editTsmi";
+            this.editTsmi.Size = new System.Drawing.Size(44, 22);
+            this.editTsmi.Text = "編集";
             // 
-            // 元に戻すToolStripMenuItem
+            // undoTsmi
             // 
-            this.元に戻すToolStripMenuItem.Name = "元に戻すToolStripMenuItem";
-            this.元に戻すToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
-            this.元に戻すToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
-            this.元に戻すToolStripMenuItem.Text = "元に戻す";
+            this.undoTsmi.Name = "undoTsmi";
+            this.undoTsmi.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
+            this.undoTsmi.Size = new System.Drawing.Size(208, 22);
+            this.undoTsmi.Text = "元に戻す";
+            this.undoTsmi.Click += new System.EventHandler(this.undoTsmi_Click);
             // 
-            // やり直しToolStripMenuItem
+            // redoTsmi
             // 
-            this.やり直しToolStripMenuItem.Name = "やり直しToolStripMenuItem";
-            this.やり直しToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            this.redoTsmi.Name = "redoTsmi";
+            this.redoTsmi.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.Z)));
-            this.やり直しToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
-            this.やり直しToolStripMenuItem.Text = "やり直し";
+            this.redoTsmi.Size = new System.Drawing.Size(208, 22);
+            this.redoTsmi.Text = "やり直し";
+            this.redoTsmi.Click += new System.EventHandler(this.redoTsmi_Click);
             // 
             // optionTsmi
             // 
@@ -224,7 +217,7 @@
             this.drawTsmi,
             this.eraseTsmi});
             this.modeTsmi.Name = "modeTsmi";
-            this.modeTsmi.Size = new System.Drawing.Size(152, 22);
+            this.modeTsmi.Size = new System.Drawing.Size(112, 22);
             this.modeTsmi.Text = "モード";
             // 
             // drawTsmi
@@ -249,7 +242,7 @@
             this.ovalTsmi,
             this.lineTsmi});
             this.diagramTsmi.Name = "diagramTsmi";
-            this.diagramTsmi.Size = new System.Drawing.Size(152, 22);
+            this.diagramTsmi.Size = new System.Drawing.Size(112, 22);
             this.diagramTsmi.Text = "図形";
             // 
             // rectTsmi
@@ -281,7 +274,7 @@
             this.edgeColorTsmi,
             this.fillColorTsmi});
             this.colorTsmi.Name = "colorTsmi";
-            this.colorTsmi.Size = new System.Drawing.Size(152, 22);
+            this.colorTsmi.Size = new System.Drawing.Size(112, 22);
             this.colorTsmi.Text = "色";
             // 
             // edgeColorTsmi
@@ -334,6 +327,7 @@
             // statusBarSs
             // 
             this.statusBarSs.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.modeTssl,
             this.canvasTssl,
             this.canvasXTssl,
             this.canvasYTssl,
@@ -346,6 +340,12 @@
             this.statusBarSs.TabIndex = 1;
             this.statusBarSs.Text = "statusStrip1";
             // 
+            // modeTssl
+            // 
+            this.modeTssl.Name = "modeTssl";
+            this.modeTssl.Size = new System.Drawing.Size(68, 18);
+            this.modeTssl.Text = "描画モード";
+            // 
             // canvasTssl
             // 
             this.canvasTssl.Name = "canvasTssl";
@@ -355,14 +355,14 @@
             // canvasXTssl
             // 
             this.canvasXTssl.Name = "canvasXTssl";
-            this.canvasXTssl.Size = new System.Drawing.Size(16, 18);
-            this.canvasXTssl.Text = "X";
+            this.canvasXTssl.Size = new System.Drawing.Size(30, 18);
+            this.canvasXTssl.Text = "X =";
             // 
             // canvasYTssl
             // 
             this.canvasYTssl.Name = "canvasYTssl";
-            this.canvasYTssl.Size = new System.Drawing.Size(16, 18);
-            this.canvasYTssl.Text = "Y";
+            this.canvasYTssl.Size = new System.Drawing.Size(30, 18);
+            this.canvasYTssl.Text = "Y =";
             // 
             // coordinateTssl
             // 
@@ -427,9 +427,7 @@
         private System.Windows.Forms.SaveFileDialog sfd;
         private System.Windows.Forms.ToolStripMenuItem newTsmi;
         private System.Windows.Forms.ToolStripMenuItem saveTsmi;
-        private System.Windows.Forms.ToolStripMenuItem printSubTsmi;
         private System.Windows.Forms.ToolStripMenuItem printTsmi;
-        private System.Windows.Forms.ToolStripMenuItem printPreviewTsmi;
         private System.Windows.Forms.ToolStripMenuItem quitTsmi;
         private System.Windows.Forms.ToolStripMenuItem helpTsmi;
         private System.Windows.Forms.ToolStripMenuItem versionTsmi;
@@ -447,11 +445,13 @@
         private System.Windows.Forms.ToolStripStatusLabel coordinateYTssl;
         private System.Windows.Forms.ToolStripSeparator printTss;
         private System.Windows.Forms.ToolStripSeparator systemTss;
-        private System.Windows.Forms.ToolStripMenuItem 編集ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 元に戻すToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem やり直しToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editTsmi;
+        private System.Windows.Forms.ToolStripMenuItem undoTsmi;
+        private System.Windows.Forms.ToolStripMenuItem redoTsmi;
         private System.Windows.Forms.ToolStripMenuItem edgeColorTsmi;
         private System.Windows.Forms.ToolStripMenuItem fillColorTsmi;
+        private System.Windows.Forms.ToolStripStatusLabel modeTssl;
+        private System.Windows.Forms.ToolStripMenuItem printPreviewTsmi;
     }
 }
 

@@ -46,6 +46,30 @@ namespace Drawing
             df.currentShape = DrawingFm.Shape.LINE;
         }
 
+        private void drawBtn_Click(object sender, EventArgs e)
+        {
+            if (df.currentMode == DrawingFm.Mode.DRAW)
+            {
+                df.changeMode(DrawingFm.Mode.NONE);
+            }
+            else
+            {
+                df.changeMode(DrawingFm.Mode.DRAW);
+            }
+        }
+
+        private void eraseBtn_Click(object sender, EventArgs e)
+        {
+            if (df.currentMode == DrawingFm.Mode.ERASE)
+            {
+                df.changeMode(DrawingFm.Mode.NONE);
+            }
+            else
+            {
+                df.changeMode(DrawingFm.Mode.ERASE);
+            }
+        }
+
         //  フロートメニューの情報の更新
         //  コマンドバーから変更された設定をフロートメニューに反映する
         public void reflesh()
@@ -68,6 +92,22 @@ namespace Drawing
             {
                 redoBtn.Enabled = false;
             }
+
+            //  モード選択の反映
+            if (df.currentMode == DrawingFm.Mode.NONE)
+            {
+                drawBtn.Checked = false;
+                eraseBtn.Checked = false;
+            }
+            else if (df.currentMode == DrawingFm.Mode.DRAW)
+            {
+                drawBtn.Checked = true;
+            }
+            else if (df.currentMode == DrawingFm.Mode.ERASE)
+            {
+                eraseBtn.Checked = true;
+            }
+
             //  塗りつぶしの状態を反映
             fillBtn.Checked = df.shapeFilled;
             if (df.shapeFilled)
