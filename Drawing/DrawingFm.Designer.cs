@@ -217,7 +217,7 @@
             this.drawTsmi,
             this.eraseTsmi});
             this.modeTsmi.Name = "modeTsmi";
-            this.modeTsmi.Size = new System.Drawing.Size(112, 22);
+            this.modeTsmi.Size = new System.Drawing.Size(152, 22);
             this.modeTsmi.Text = "モード";
             // 
             // drawTsmi
@@ -225,14 +225,13 @@
             this.drawTsmi.Checked = true;
             this.drawTsmi.CheckState = System.Windows.Forms.CheckState.Checked;
             this.drawTsmi.Name = "drawTsmi";
-            this.drawTsmi.Size = new System.Drawing.Size(100, 22);
+            this.drawTsmi.Size = new System.Drawing.Size(152, 22);
             this.drawTsmi.Text = "描く";
             // 
             // eraseTsmi
             // 
-            this.eraseTsmi.Enabled = false;
             this.eraseTsmi.Name = "eraseTsmi";
-            this.eraseTsmi.Size = new System.Drawing.Size(100, 22);
+            this.eraseTsmi.Size = new System.Drawing.Size(152, 22);
             this.eraseTsmi.Text = "消す";
             // 
             // diagramTsmi
@@ -242,7 +241,7 @@
             this.ovalTsmi,
             this.lineTsmi});
             this.diagramTsmi.Name = "diagramTsmi";
-            this.diagramTsmi.Size = new System.Drawing.Size(112, 22);
+            this.diagramTsmi.Size = new System.Drawing.Size(152, 22);
             this.diagramTsmi.Text = "図形";
             // 
             // rectTsmi
@@ -250,21 +249,21 @@
             this.rectTsmi.Checked = true;
             this.rectTsmi.CheckState = System.Windows.Forms.CheckState.Checked;
             this.rectTsmi.Name = "rectTsmi";
-            this.rectTsmi.Size = new System.Drawing.Size(112, 22);
+            this.rectTsmi.Size = new System.Drawing.Size(152, 22);
             this.rectTsmi.Text = "四角形";
             this.rectTsmi.Click += new System.EventHandler(this.rectTsmi_Click);
             // 
             // ovalTsmi
             // 
             this.ovalTsmi.Name = "ovalTsmi";
-            this.ovalTsmi.Size = new System.Drawing.Size(112, 22);
+            this.ovalTsmi.Size = new System.Drawing.Size(152, 22);
             this.ovalTsmi.Text = "楕円";
             this.ovalTsmi.Click += new System.EventHandler(this.ovalTsmi_Click);
             // 
             // lineTsmi
             // 
             this.lineTsmi.Name = "lineTsmi";
-            this.lineTsmi.Size = new System.Drawing.Size(112, 22);
+            this.lineTsmi.Size = new System.Drawing.Size(152, 22);
             this.lineTsmi.Text = "直線";
             this.lineTsmi.Click += new System.EventHandler(this.lineTsmi_Click);
             // 
@@ -274,7 +273,7 @@
             this.edgeColorTsmi,
             this.fillColorTsmi});
             this.colorTsmi.Name = "colorTsmi";
-            this.colorTsmi.Size = new System.Drawing.Size(112, 22);
+            this.colorTsmi.Size = new System.Drawing.Size(152, 22);
             this.colorTsmi.Text = "色";
             // 
             // edgeColorTsmi

@@ -17,7 +17,7 @@ namespace Drawing
 
         abstract public class Mode
         {
-            public static int NONE = 0;
+            public static int SELECT = 0;
             public static int DRAW = 1;
             public static int ERASE = 2;
         }
@@ -25,7 +25,7 @@ namespace Drawing
         public void changeMode(int mode)
         {
             currentMode = mode;
-            if (mode == Mode.NONE)
+            if (mode == Mode.SELECT)
             {
                 modeTssl.Text = "選択モード";
             }
@@ -41,6 +41,53 @@ namespace Drawing
         }
 
         public void DrawingFm_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (currentMode == Mode.SELECT)
+            {
+
+            }
+            else if (currentMode == Mode.DRAW)
+            {
+                drawModeMouseDown(e);
+            }
+            else if (currentMode == Mode.ERASE)
+            {
+                eraseModeMouseDown(e);
+            }
+        }
+
+        private void DrawingFm_MouseMove(object sender, MouseEventArgs e)
+        {
+            //  ステータスバーに座標を表示
+            coordinateXTssl.Text = "X = " + e.X.ToString();
+            coordinateYTssl.Text = "Y = " + (e.Y - commandBarMs.Height).ToString();
+            //  再描画
+            if (drawState) { redraw(e); }
+        }
+
+        private void DrawingFm_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (currentMode == Mode.DRAW)
+            {
+                //  再描画
+                redraw(e);
+                //  描画状態フラグを無効にする
+                drawState = false;
+            }
+            else if (currentMode == Mode.ERASE)
+            {
+                this.Invalidate();
+            }
+            //  保存状態フラグを無効に
+            savedState = false;
+            //  キャプションの更新
+            setCaption();
+        }
+
+        #region 描画モード
+
+        //  描画
+        private void drawModeMouseDown(MouseEventArgs e)
         {
             //  描画状態フラグを有効にする
             drawState = true;
@@ -58,7 +105,7 @@ namespace Drawing
                 {
                     sh = new OutlineRect();
                 }
-                
+
             }
             else if (currentShape == Shape.OVAL)
             {
@@ -70,7 +117,7 @@ namespace Drawing
                 {
                     sh = new OutlineOval();
                 }
-                
+
             }
             else if (currentShape == Shape.LINE)
             {
@@ -86,32 +133,10 @@ namespace Drawing
             //  図形オブジェクトをリストに追加
             shapeList.Add(sh);
             //  再描画
-            draw(e);
+            redraw(e);
         }
 
-        private void DrawingFm_MouseMove(object sender, MouseEventArgs e)
-        {
-            //  ステータスバーに座標を表示
-            coordinateXTssl.Text = "X = " + e.X.ToString();
-            coordinateYTssl.Text = "Y = " + (e.Y - commandBarMs.Height).ToString();
-            //  再描画
-            if (drawState) { draw(e); }
-        }
-
-        private void DrawingFm_MouseUp(object sender, MouseEventArgs e)
-        {
-            //  再描画
-            draw(e);
-            //  保存状態フラグを無効に
-            savedState = false;
-            //  キャプションの更新
-            setCaption();
-            //  描画状態フラグを無効にする
-            drawState = false;
-        }
-
-        //  描画
-        private void draw(MouseEventArgs e)
+        private void redraw(MouseEventArgs e)
         {
             //  図形オブジェクトをリストから取り出す
             Shape sh =
@@ -120,6 +145,25 @@ namespace Drawing
             //  再描画
             this.Invalidate();
         }
+        #endregion
+
+        #region 消去モード
+        public void eraseModeMouseDown(MouseEventArgs e)
+        {
+            for (int i = shapeList.Count - 1; i >= 0; i--)
+            {
+                Shape sh =
+                    (Shape)(shapeList[i] as Shape);
+                Point sp = sh.GetStartPoint();
+                Point ep = sh.GetEndPoint();
+                if (e.X > sp.X && e.X < ep.X && e.Y > sp.Y && e.Y < ep.Y)
+                {
+                    shapeList.RemoveAt(i);
+                    break;
+                }
+            }
+        }
+        #endregion
 
         private void DrawingFm_Paint(object sender, PaintEventArgs e)
         {

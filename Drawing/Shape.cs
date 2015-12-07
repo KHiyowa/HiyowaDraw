@@ -7,7 +7,6 @@ namespace Drawing
     public partial class DrawingFm
     {
         public static List<Shape> shapeList;
-        public static Stack<Shape> redoStack;
 
         [Serializable]
         abstract public class Shape
@@ -35,9 +34,17 @@ namespace Drawing
             {
                 x1 = x; y1 = y;
             }
+            public Point GetStartPoint()
+            {
+                return new Point(x1, y1);
+            }
             public void SetEndPoint(int x, int y)
             {
                 x2 = x; y2 = y;
+            }
+            public Point GetEndPoint()
+            {
+                return new Point(x2, y2);
             }
         }
 
