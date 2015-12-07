@@ -10,6 +10,9 @@ namespace Drawing
 {
     public partial class DrawingFm
     {
+        //  元に戻す/やり直しのスタック
+        public static Stack<Shape> redoStack;
+
         //  新規作成
         private void newCanvas()
         {

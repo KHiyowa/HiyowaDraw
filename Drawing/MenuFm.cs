@@ -50,7 +50,7 @@ namespace Drawing
         {
             if (df.currentMode == DrawingFm.Mode.DRAW)
             {
-                df.changeMode(DrawingFm.Mode.NONE);
+                df.changeMode(DrawingFm.Mode.SELECT);
             }
             else
             {
@@ -62,7 +62,7 @@ namespace Drawing
         {
             if (df.currentMode == DrawingFm.Mode.ERASE)
             {
-                df.changeMode(DrawingFm.Mode.NONE);
+                df.changeMode(DrawingFm.Mode.SELECT);
             }
             else
             {
@@ -98,7 +98,7 @@ namespace Drawing
             }
 
             //  モード選択の反映
-            if (df.currentMode == DrawingFm.Mode.NONE)
+            if (df.currentMode == DrawingFm.Mode.SELECT)
             {
                 drawBtn.Checked = false;
                 eraseBtn.Checked = false;
