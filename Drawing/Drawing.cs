@@ -132,6 +132,12 @@ namespace Drawing
             sh.SetEndPoint(e.X, e.Y);
             //  図形オブジェクトをリストに追加
             shapeList.Add(sh);
+            //  図形の描画をUndoスタックに追加
+            Cancellation undo = new Cancellation();
+            undo.setEditType(EditType.DRAW);
+            undo.setPosition(shapeList.Count - 1);
+            undo.setShape(sh);
+            undoStack.Push(undo);
             //  再描画
             redraw(e);
         }
@@ -158,6 +164,13 @@ namespace Drawing
                 Point ep = sh.GetEndPoint();
                 if (e.X > sp.X && e.X < ep.X && e.Y > sp.Y && e.Y < ep.Y)
                 {
+                    //  図形の削除をUndoスタックに追加
+                    Cancellation undo = new Cancellation();
+                    undo.setEditType(EditType.ERASE);
+                    undo.setPosition(i);
+                    undo.setShape(shapeList[i]);
+                    undoStack.Push(undo);
+                    //  図形オブジェクトをリストから削除
                     shapeList.RemoveAt(i);
                     break;
                 }
