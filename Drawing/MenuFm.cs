@@ -74,9 +74,8 @@ namespace Drawing
         //  コマンドバーから変更された設定をフロートメニューに反映する
         public void reflesh()
         {
-            /*
             //  Undoの可否を反映
-            if (DrawingFm.shapeList.Count != 0)
+            if (DrawingFm.undoStack.Count != 0)
             {
                 undoBtn.Enabled = true;
                 undoBtn.BackgroundImage = Properties.Resources.undoEnabled;
@@ -97,7 +96,6 @@ namespace Drawing
                 redoBtn.Enabled = false;
                 redoBtn.BackgroundImage = Properties.Resources.redoDisabled;
             }
-            */
 
             //  モード選択の反映
             if (df.currentMode == DrawingFm.Mode.SELECT)

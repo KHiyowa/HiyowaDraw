@@ -11,14 +11,54 @@ namespace Drawing
     public partial class DrawingFm
     {
         //  元に戻す/やり直しのスタック
-        public static Stack<Shape> redoStack;
+        public static Stack<Cancellation> undoStack;
+        public static Stack<Cancellation> redoStack;
+
+        abstract private class EditType
+        {
+            public static int DRAW = 0;
+            public static int ERASE = 1;
+            public static int MODIFY = 2;
+        }
+
+        public class Cancellation
+        {
+            public static int edittype;
+            public static int position;
+            public static Shape shape;
+            public int getEditType()
+            {
+                return edittype;
+            }
+            public void setEditType(int type)
+            {
+                edittype = type;
+            }
+            public int getPosition()
+            {
+                return position;
+            }
+            public void setPosition(int pos)
+            {
+                position = pos;
+            }
+            public Shape getShape()
+            {
+                return shape;
+            }
+            public void setShape(Shape sh)
+            {
+                shape = sh;
+            }
+        }
 
         //  新規作成
         private void newCanvas()
         {
             //  リストを初期化
             shapeList = new List<Shape>();
-            redoStack = new Stack<Shape>();
+            undoStack = new Stack<Cancellation>();
+            redoStack = new Stack<Cancellation>();
 
             //  保存状態をクリア
             savedState = true;
@@ -45,21 +85,37 @@ namespace Drawing
             canvasYTssl.Text = "Y = " + canvasSize.Height.ToString();
         }
 
+        #region UndoRedo
         //  元に戻す
         public void undo()
         {
-            if (shapeList.Count == 0) { return; }
-            redoStack.Push(shapeList[shapeList.Count - 1]);
-            shapeList.RemoveAt(shapeList.Count - 1);
-            this.Invalidate();
+            cancellation(undoStack, redoStack);
         }
 
         //  やり直し
         public void redo()
         {
-            if (redoStack.Count == 0) { return; }
-            shapeList.Add(redoStack.Pop());
+            cancellation(redoStack, undoStack);
+        }
+
+        public void cancellation(Stack<Cancellation> undo, Stack<Cancellation> redo)
+        {
+            if (undo.Count == 0) { return; }
+            Cancellation sh = undo.Pop();
+            if (sh.getEditType() == EditType.DRAW)
+            {
+                shapeList.RemoveAt(sh.getPosition());
+                sh.setEditType(EditType.ERASE);
+                redo.Push(sh);
+            }
+            else if (sh.getEditType() == EditType.ERASE)
+            {
+                shapeList.Insert(sh.getPosition(), sh.getShape());
+                sh.setEditType(EditType.DRAW);
+                redo.Push(sh);
+            }
             this.Invalidate();
         }
+        #endregion
     }
 }
