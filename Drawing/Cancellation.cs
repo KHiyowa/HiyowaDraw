@@ -12,44 +12,53 @@ namespace Drawing
         public static Stack<Cancellation> undoStack;
         public static Stack<Cancellation> redoStack;
 
-        abstract private class EditType
+        [Serializable]
+        public class Cancellation
         {
             public static int DRAW = 0;
             public static int ERASE = 1;
             public static int MODIFY = 2;
-        }
 
-        public class Cancellation
-        {
-            public static int edittype;
-            public static int position;
-            public static Shape shape;
-            public int getEditType()
+            protected int edittype;
+            protected int position;
+            protected Shape shape;
+
+            public int GetEditType()
             {
                 return edittype;
             }
-            public void setEditType(int type)
+            public void SetEditType(int edittype)
             {
-                edittype = type;
+                this.edittype = edittype;
             }
-            public int getPosition()
+            public int GetPosition()
             {
                 return position;
             }
-            public void setPosition(int pos)
+            public void SetPosition(int position)
             {
-                position = pos;
+                this.position = position;
             }
-            public Shape getShape()
+            public Shape GetShape()
             {
                 return shape;
             }
-            public void setShape(Shape sh)
+            public void SetShape(Shape shape)
             {
-                shape = sh;
+                this.shape = shape;
             }
         }
-        #region UndoRedo
+
+        //  Cancellationスタックへのプッシュ
+        public void undoPush(int edittype, int position, Shape shape)
+        {
+            Cancellation cs = new Cancellation();
+            cs.SetEditType(edittype);
+            cs.SetPosition(position);
+            cs.SetShape(shape);
+            undoStack.Push(cs);
+        }
+
         //  元に戻す
         public void undo()
         {
@@ -66,20 +75,19 @@ namespace Drawing
         {
             if (undo.Count == 0) { return; }
             Cancellation cs = undo.Pop();
-            if (cs.getEditType() == EditType.DRAW)
+            if (Cancellation.DRAW == cs.GetEditType())
             {
-                shapeList.RemoveAt(cs.getPosition());
-                // cs.setEditType(EditType.ERASE);
+                shapeList.RemoveAt(cs.GetPosition());
+                cs.SetEditType(Cancellation.ERASE);
                 redo.Push(cs);
             }
-            else if (cs.getEditType() == EditType.ERASE)
+            else if (Cancellation.ERASE == cs.GetEditType())
             {
-                shapeList.Insert(cs.getPosition(), cs.getShape());
-                // cs.setEditType(EditType.DRAW);
+                shapeList.Insert(cs.GetPosition(), cs.GetShape());
+                cs.SetEditType(Cancellation.DRAW);
                 redo.Push(cs);
             }
             this.Invalidate();
         }
-        #endregion
     }
 }
