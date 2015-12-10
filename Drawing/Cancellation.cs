@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Drawing
 {
@@ -49,7 +46,7 @@ namespace Drawing
             }
         }
 
-        //  Cancellationスタックへのプッシュ
+        //  undoスタックへのプッシュ
         public void undoPush(int edittype, int position, Shape shape)
         {
             Cancellation cs = new Cancellation();
@@ -57,6 +54,7 @@ namespace Drawing
             cs.SetPosition(position);
             cs.SetShape(shape);
             undoStack.Push(cs);
+            redoStack.Clear();
         }
 
         //  元に戻す

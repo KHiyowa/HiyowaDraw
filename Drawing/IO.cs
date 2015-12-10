@@ -4,6 +4,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Drawing.Printing;
 
 namespace Drawing
 {
@@ -144,6 +145,17 @@ namespace Drawing
                 text = "無題";
             }
             return text;
+        }
+
+        //  プリント
+        private void pd_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            Graphics g = e.Graphics;
+
+            foreach (Shape sh in shapeList)
+            {
+                sh.Draw(g);
+            }
         }
     }
 }
