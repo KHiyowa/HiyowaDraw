@@ -12,7 +12,9 @@ namespace Drawing
 
     public partial class DrawingFm
     {
-        #region Modeの定義
+        public bool dragState = false;
+
+        #region モード
         abstract public class Mode
         {
             public static int SELECT = 0;
@@ -23,6 +25,7 @@ namespace Drawing
         public void changeMode(int mode)
         {
             currentMode = mode;
+            select = null;
             if (mode == Mode.SELECT)
             {
                 modeTssl.Text = "選択モード";
@@ -82,8 +85,8 @@ namespace Drawing
         #region マウスイベント
         public void DrawingFm_MouseDown(object sender, MouseEventArgs e)
         {
-            //  描画状態フラグを有効にする
-            drawState = true;
+            //  ドラグ状態フラグを有効にする
+            dragState = true;
 
             if (currentMode == Mode.SELECT)
             {
@@ -105,9 +108,14 @@ namespace Drawing
             coordinateXTssl.Text = "X = " + e.X.ToString();
             coordinateYTssl.Text = "Y = " + (e.Y - commandBarMs.Height).ToString();
             //  再描画
-            if (drawState)
+            if (currentMode == Mode.DRAW && dragState)
             {
                 redraw(e);
+            }
+
+            if (currentMode == Mode.SELECT)
+            {
+                selectModeMouseMove(e); 
             }
         }
 
@@ -121,12 +129,32 @@ namespace Drawing
             {
                 this.Invalidate();
             }
-
+            //  ドラグ状態フラグを無効にする
+            dragState = false;
             //  保存状態フラグを無効に
             savedState = false;
             //  キャプションの更新
             setCaption();
         }
         #endregion
+
+        //  キャンバスの描画
+        private void DrawingFm_Paint(object sender, PaintEventArgs e)
+        {
+            Graphics g = e.Graphics;
+
+            //  shapeListの内容を描画
+            foreach (Shape sh in shapeList)
+            {
+                sh.Draw(g);
+            }
+
+            //  選択モード中で、矩形がnullでなければ
+            if (currentMode == Mode.SELECT && select != null)
+            {
+                select.Draw(g);
+            }
+
+        }
     }
 }

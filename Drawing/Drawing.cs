@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace Drawing
 {
-    //  描画に関するメソッド類
+    //  描画モードに関するメソッド類
 
     public partial class DrawingFm
     {
@@ -15,7 +15,6 @@ namespace Drawing
         public int lineWidth;
         public Color currentEdgeColor;
         public Color currentFillColor;
-        public bool drawState = false;
         public static List<Shape> shapeList;
 
         #region Shapeの定義
@@ -171,8 +170,6 @@ namespace Drawing
             this.Invalidate();
             //  undoスタックに操作を追加
             undoPush(Cancellation.DRAW, shapeList.Count - 1, sh);
-            //  描画状態フラグを無効にする
-            drawState = false;
         }
 
         private void redraw(MouseEventArgs e)
@@ -206,15 +203,5 @@ namespace Drawing
             }
         }
         #endregion
-
-        private void DrawingFm_Paint(object sender, PaintEventArgs e)
-        {
-            Graphics g = e.Graphics;
-
-            foreach (Shape sh in shapeList)
-            {
-                sh.Draw(g);
-            }
-        }
     }
 }
