@@ -1,10 +1,12 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
 namespace Drawing
 {
+    //  描画に関するメソッド類
+
     public partial class DrawingFm
     {
         public int currentMode;
@@ -14,92 +16,109 @@ namespace Drawing
         public Color currentEdgeColor;
         public Color currentFillColor;
         public bool drawState = false;
+        public static List<Shape> shapeList;
 
-        abstract public class Mode
+        #region Shapeの定義
+        [Serializable]
+        abstract public class Shape
         {
-            public static int SELECT = 0;
-            public static int DRAW = 1;
-            public static int ERASE = 2;
+            public static int RECT = 0;
+            public static int OVAL = 1;
+            public static int LINE = 2;
+            protected int x1, y1, x2, y2;
+            protected Color ec;
+            protected Color fc;
+            protected int w;
+
+            abstract public void Draw(Graphics g);
+
+            public void SetColor(Color ec, Color fc)
+            {
+                this.ec = ec;
+                this.fc = fc;
+            }
+            public void SetWidth(int w)
+            {
+                this.w = w;
+            }
+            public void SetStartPoint(int x, int y)
+            {
+                x1 = x; y1 = y;
+            }
+            public Point GetStartPoint()
+            {
+                return new Point(x1, y1);
+            }
+            public void SetEndPoint(int x, int y)
+            {
+                x2 = x; y2 = y;
+            }
+            public Point GetEndPoint()
+            {
+                return new Point(x2, y2);
+            }
         }
 
-        public void changeMode(int mode)
+        [Serializable]
+        class OutlineRect : Shape
         {
-            currentMode = mode;
-            if (mode == Mode.SELECT)
+            public override void Draw(Graphics g)
             {
-                modeTssl.Text = "選択モード";
-            }
-            if (mode == Mode.DRAW)
-            {
-                modeTssl.Text = "描画モード";
-            }
-            if (mode == Mode.ERASE)
-            {
-                modeTssl.Text = "消去モード";
-            }
-            
-        }
-
-        public void DrawingFm_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (currentMode == Mode.SELECT)
-            {
-
-            }
-            else if (currentMode == Mode.DRAW)
-            {
-                drawModeMouseDown(e);
-            }
-            else if (currentMode == Mode.ERASE)
-            {
-                eraseModeMouseDown(e);
+                Pen p = new Pen(ec, w);
+                g.DrawRectangle(p, x1, y1, x2 - x1, y2 - y1);
             }
         }
 
-        private void DrawingFm_MouseMove(object sender, MouseEventArgs e)
+        [Serializable]
+        class FillRect : Shape
         {
-            //  ステータスバーに座標を表示
-            coordinateXTssl.Text = "X = " + e.X.ToString();
-            coordinateYTssl.Text = "Y = " + (e.Y - commandBarMs.Height).ToString();
-            //  再描画
-            if (drawState) { redraw(e); }
+            public override void Draw(Graphics g)
+            {
+                SolidBrush sb = new SolidBrush(fc);
+                Pen p = new Pen(ec, w);
+                g.FillRectangle(sb, x1, y1, x2 - x1, y2 - y1);
+                g.DrawRectangle(p, x1, y1, x2 - x1, y2 - y1);
+            }
         }
 
-        private void DrawingFm_MouseUp(object sender, MouseEventArgs e)
+        [Serializable]
+        class OutlineOval : Shape
         {
-            if (currentMode == Mode.DRAW)
+            public override void Draw(Graphics g)
             {
-                //  図形オブジェクトをリストから取り出す
-                Shape sh =
-                    (Shape)(shapeList[shapeList.Count - 1] as Shape);
-                sh.SetEndPoint(e.X, e.Y);
-                //  再描画
-                this.Invalidate();
-                //  undoスタックに操作を追加
-                undoPush(Cancellation.DRAW, shapeList.Count - 1, sh);
-                //  描画状態フラグを無効にする
-                drawState = false;
+                Pen p = new Pen(ec, w);
+                g.DrawEllipse(p, x1, y1, x2 - x1, y2 - y1);
             }
-            else if (currentMode == Mode.ERASE)
-            {
-                this.Invalidate();
-            }
-            //  保存状態フラグを無効に
-            savedState = false;
-            //  キャプションの更新
-            setCaption();
         }
+
+        [Serializable]
+        class FillOval : Shape
+        {
+            public override void Draw(Graphics g)
+            {
+                SolidBrush sb = new SolidBrush(fc);
+                Pen p = new Pen(ec, w);
+                g.FillEllipse(sb, x1, y1, x2 - x1, y2 - y1);
+                g.DrawEllipse(p, x1, y1, x2 - x1, y2 - y1);
+            }
+        }
+
+        [Serializable]
+        class Line : Shape
+        {
+            public override void Draw(Graphics g)
+            {
+                Pen p = new Pen(ec, w);
+                g.DrawLine(p, x1, y1, x2, y2);
+            }
+        }
+        #endregion
 
         #region 描画モード
 
         //  描画
         private void drawModeMouseDown(MouseEventArgs e)
         {
-            //  描画状態フラグを有効にする
-            drawState = true;
-            //  Redoスタックをクリアする
-            redoStack.Clear();
-
             Shape sh = null;
             if (currentShape == Shape.RECT)
             {
@@ -140,6 +159,20 @@ namespace Drawing
             shapeList.Add(sh);
             //  再描画
             redraw(e);
+        }
+
+        private void drawModeMouseUp(MouseEventArgs e)
+        {
+            //  図形オブジェクトをリストから取り出す
+            Shape sh =
+                (Shape)(shapeList[shapeList.Count - 1] as Shape);
+            sh.SetEndPoint(e.X, e.Y);
+            //  再描画
+            this.Invalidate();
+            //  undoスタックに操作を追加
+            undoPush(Cancellation.DRAW, shapeList.Count - 1, sh);
+            //  描画状態フラグを無効にする
+            drawState = false;
         }
 
         private void redraw(MouseEventArgs e)
