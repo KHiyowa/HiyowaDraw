@@ -19,7 +19,6 @@ namespace Drawing
         {
             public static int SELECT = 0;
             public static int DRAW = 1;
-            public static int ERASE = 2;
         }
 
         public void changeMode(int mode)
@@ -29,16 +28,12 @@ namespace Drawing
             if (mode == Mode.SELECT)
             {
                 modeTssl.Text = "選択モード";
+                selectMode = SelectMode.MOVE;
             }
             if (mode == Mode.DRAW)
             {
                 modeTssl.Text = "描画モード";
             }
-            if (mode == Mode.ERASE)
-            {
-                modeTssl.Text = "消去モード";
-            }
-
         }
 
         #endregion
@@ -90,15 +85,11 @@ namespace Drawing
 
             if (currentMode == Mode.SELECT)
             {
-
+                selectModeMouseDown(e);
             }
             else if (currentMode == Mode.DRAW)
             {
                 drawModeMouseDown(e);
-            }
-            else if (currentMode == Mode.ERASE)
-            {
-                eraseModeMouseDown(e);
             }
         }
 
@@ -115,7 +106,7 @@ namespace Drawing
 
             if (currentMode == Mode.SELECT)
             {
-                selectModeMouseMove(e); 
+                 
             }
         }
 
@@ -124,10 +115,6 @@ namespace Drawing
             if (currentMode == Mode.DRAW)
             {
                 drawModeMouseUp(e);
-            }
-            else if (currentMode == Mode.ERASE)
-            {
-                this.Invalidate();
             }
             //  ドラグ状態フラグを無効にする
             dragState = false;

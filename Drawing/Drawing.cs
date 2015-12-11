@@ -182,26 +182,5 @@ namespace Drawing
             this.Invalidate();
         }
         #endregion
-
-        #region 消去モード
-        public void eraseModeMouseDown(MouseEventArgs e)
-        {
-            for (int i = shapeList.Count - 1; i >= 0; i--)
-            {
-                Shape sh =
-                    (Shape)(shapeList[i] as Shape);
-                Point sp = sh.GetStartPoint();
-                Point ep = sh.GetEndPoint();
-                if (e.X > sp.X && e.X < ep.X && e.Y > sp.Y && e.Y < ep.Y)
-                {
-                    //  undoスタックに操作を追加
-                    undoPush(Cancellation.ERASE, i, sh);
-                    //  図形オブジェクトをリストから削除
-                    shapeList.RemoveAt(i);
-                    break;
-                }
-            }
-        }
-        #endregion
     }
 }

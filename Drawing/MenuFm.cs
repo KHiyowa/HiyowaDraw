@@ -48,26 +48,12 @@ namespace Drawing
 
         private void drawBtn_Click(object sender, EventArgs e)
         {
-            if (df.currentMode == DrawingFm.Mode.DRAW)
-            {
-                df.changeMode(DrawingFm.Mode.SELECT);
-            }
-            else
-            {
-                df.changeMode(DrawingFm.Mode.DRAW);
-            }
+            df.changeMode(DrawingFm.Mode.DRAW);
         }
 
-        private void eraseBtn_Click(object sender, EventArgs e)
+        private void selectBtn_Click(object sender, EventArgs e)
         {
-            if (df.currentMode == DrawingFm.Mode.ERASE)
-            {
-                df.changeMode(DrawingFm.Mode.SELECT);
-            }
-            else
-            {
-                df.changeMode(DrawingFm.Mode.ERASE);
-            }
+            df.changeMode(DrawingFm.Mode.SELECT);
         }
 
         //  フロートメニューの情報の更新
@@ -100,14 +86,23 @@ namespace Drawing
             //  モード選択の反映
             if (df.currentMode == DrawingFm.Mode.SELECT)
             {
-                drawBtn.Checked = false;
-                eraseBtn.Checked = false;
+                selectBtn.Checked = true;
+                this.Width = 565;
+                this.Height = 210;
             }
             else if (df.currentMode == DrawingFm.Mode.DRAW)
             {
                 drawBtn.Checked = true;
+                this.Width = 430;
+                this.Height = 210;
             }
-            else if (df.currentMode == DrawingFm.Mode.ERASE)
+
+            //  選択モード中のサブモードの反映
+            if (df.selectMode == DrawingFm.SelectMode.MOVE)
+            {
+                moveBtn.Checked = true;
+            }
+            else if (df.selectMode == DrawingFm.SelectMode.ERASE)
             {
                 eraseBtn.Checked = true;
             }
@@ -192,6 +187,16 @@ namespace Drawing
         private void redoBtn_Click(object sender, EventArgs e)
         {
             df.redo();
+        }
+
+        private void moveBtn_Click(object sender, EventArgs e)
+        {
+            df.selectMode = DrawingFm.SelectMode.MOVE;
+        }
+
+        private void eraseBtn_Click(object sender, EventArgs e)
+        {
+            df.selectMode = DrawingFm.SelectMode.ERASE;
         }
     }
 }

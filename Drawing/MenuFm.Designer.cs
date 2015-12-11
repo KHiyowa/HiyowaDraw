@@ -35,7 +35,7 @@
             this.ovalBtn = new System.Windows.Forms.RadioButton();
             this.rectBtn = new System.Windows.Forms.RadioButton();
             this.ModeGb = new System.Windows.Forms.GroupBox();
-            this.eraseBtn = new System.Windows.Forms.RadioButton();
+            this.selectBtn = new System.Windows.Forms.RadioButton();
             this.drawBtn = new System.Windows.Forms.RadioButton();
             this.topMostCb = new System.Windows.Forms.CheckBox();
             this.attributeGb = new System.Windows.Forms.GroupBox();
@@ -50,12 +50,16 @@
             this.redoBtn = new System.Windows.Forms.Button();
             this.undoBtn = new System.Windows.Forms.Button();
             this.colorGb = new System.Windows.Forms.GroupBox();
+            this.selectFm = new System.Windows.Forms.GroupBox();
+            this.eraseBtn = new System.Windows.Forms.RadioButton();
+            this.moveBtn = new System.Windows.Forms.RadioButton();
             this.drawingGb.SuspendLayout();
             this.ModeGb.SuspendLayout();
             this.attributeGb.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lineWidthNud)).BeginInit();
             this.operateGb.SuspendLayout();
             this.colorGb.SuspendLayout();
+            this.selectFm.SuspendLayout();
             this.SuspendLayout();
             // 
             // drawingGb
@@ -65,7 +69,7 @@
             this.drawingGb.Controls.Add(this.rectBtn);
             this.drawingGb.Location = new System.Drawing.Point(148, 12);
             this.drawingGb.Name = "drawingGb";
-            this.drawingGb.Size = new System.Drawing.Size(121, 128);
+            this.drawingGb.Size = new System.Drawing.Size(119, 128);
             this.drawingGb.TabIndex = 0;
             this.drawingGb.TabStop = false;
             this.drawingGb.Text = "図形";
@@ -119,29 +123,29 @@
             // 
             // ModeGb
             // 
-            this.ModeGb.Controls.Add(this.eraseBtn);
+            this.ModeGb.Controls.Add(this.selectBtn);
             this.ModeGb.Controls.Add(this.drawBtn);
-            this.ModeGb.Location = new System.Drawing.Point(79, 12);
+            this.ModeGb.Location = new System.Drawing.Point(80, 12);
             this.ModeGb.Name = "ModeGb";
-            this.ModeGb.Size = new System.Drawing.Size(63, 128);
+            this.ModeGb.Size = new System.Drawing.Size(62, 128);
             this.ModeGb.TabIndex = 1;
             this.ModeGb.TabStop = false;
             this.ModeGb.Text = "モード";
             // 
-            // eraseBtn
+            // selectBtn
             // 
-            this.eraseBtn.Appearance = System.Windows.Forms.Appearance.Button;
-            this.eraseBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("eraseBtn.BackgroundImage")));
-            this.eraseBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.eraseBtn.Font = new System.Drawing.Font("MS UI Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.eraseBtn.Location = new System.Drawing.Point(6, 74);
-            this.eraseBtn.Name = "eraseBtn";
-            this.eraseBtn.Size = new System.Drawing.Size(50, 50);
-            this.eraseBtn.TabIndex = 1;
-            this.eraseBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.tt.SetToolTip(this.eraseBtn, "消去します");
-            this.eraseBtn.UseVisualStyleBackColor = true;
-            this.eraseBtn.Click += new System.EventHandler(this.eraseBtn_Click);
+            this.selectBtn.Appearance = System.Windows.Forms.Appearance.Button;
+            this.selectBtn.BackgroundImage = global::Drawing.Properties.Resources.select;
+            this.selectBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.selectBtn.Font = new System.Drawing.Font("MS UI Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.selectBtn.Location = new System.Drawing.Point(6, 18);
+            this.selectBtn.Name = "selectBtn";
+            this.selectBtn.Size = new System.Drawing.Size(50, 50);
+            this.selectBtn.TabIndex = 1;
+            this.selectBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.tt.SetToolTip(this.selectBtn, "消去します");
+            this.selectBtn.UseVisualStyleBackColor = true;
+            this.selectBtn.Click += new System.EventHandler(this.selectBtn_Click);
             // 
             // drawBtn
             // 
@@ -150,7 +154,7 @@
             this.drawBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.drawBtn.Checked = true;
             this.drawBtn.Font = new System.Drawing.Font("MS UI Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.drawBtn.Location = new System.Drawing.Point(6, 18);
+            this.drawBtn.Location = new System.Drawing.Point(6, 74);
             this.drawBtn.Name = "drawBtn";
             this.drawBtn.Size = new System.Drawing.Size(50, 50);
             this.drawBtn.TabIndex = 0;
@@ -179,9 +183,9 @@
             this.attributeGb.Controls.Add(this.fillBtn);
             this.attributeGb.Controls.Add(this.lineWidthLb);
             this.attributeGb.Controls.Add(this.lineWidthNud);
-            this.attributeGb.Location = new System.Drawing.Point(275, 12);
+            this.attributeGb.Location = new System.Drawing.Point(273, 12);
             this.attributeGb.Name = "attributeGb";
-            this.attributeGb.Size = new System.Drawing.Size(65, 128);
+            this.attributeGb.Size = new System.Drawing.Size(62, 128);
             this.attributeGb.TabIndex = 3;
             this.attributeGb.TabStop = false;
             this.attributeGb.Text = "属性";
@@ -192,7 +196,7 @@
             this.fillBtn.Checked = true;
             this.fillBtn.CheckState = System.Windows.Forms.CheckState.Checked;
             this.fillBtn.Font = new System.Drawing.Font("MS UI Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.fillBtn.Location = new System.Drawing.Point(8, 18);
+            this.fillBtn.Location = new System.Drawing.Point(6, 18);
             this.fillBtn.Name = "fillBtn";
             this.fillBtn.Size = new System.Drawing.Size(50, 50);
             this.fillBtn.TabIndex = 7;
@@ -257,7 +261,7 @@
             this.operateGb.Controls.Add(this.undoBtn);
             this.operateGb.Location = new System.Drawing.Point(12, 12);
             this.operateGb.Name = "operateGb";
-            this.operateGb.Size = new System.Drawing.Size(61, 128);
+            this.operateGb.Size = new System.Drawing.Size(62, 128);
             this.operateGb.TabIndex = 4;
             this.operateGb.TabStop = false;
             this.operateGb.Text = "操作";
@@ -269,7 +273,7 @@
             this.redoBtn.Enabled = false;
             this.redoBtn.Font = new System.Drawing.Font("MS UI Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.redoBtn.ForeColor = System.Drawing.Color.Blue;
-            this.redoBtn.Location = new System.Drawing.Point(6, 72);
+            this.redoBtn.Location = new System.Drawing.Point(6, 74);
             this.redoBtn.Name = "redoBtn";
             this.redoBtn.Size = new System.Drawing.Size(50, 50);
             this.redoBtn.TabIndex = 1;
@@ -293,19 +297,59 @@
             // 
             this.colorGb.Controls.Add(this.edgeColorBtn);
             this.colorGb.Controls.Add(this.fillColorBtn);
-            this.colorGb.Location = new System.Drawing.Point(346, 12);
+            this.colorGb.Location = new System.Drawing.Point(341, 12);
             this.colorGb.Name = "colorGb";
-            this.colorGb.Size = new System.Drawing.Size(65, 128);
+            this.colorGb.Size = new System.Drawing.Size(62, 128);
             this.colorGb.TabIndex = 6;
             this.colorGb.TabStop = false;
             this.colorGb.Text = "色";
+            // 
+            // selectFm
+            // 
+            this.selectFm.Controls.Add(this.eraseBtn);
+            this.selectFm.Controls.Add(this.moveBtn);
+            this.selectFm.Location = new System.Drawing.Point(418, 12);
+            this.selectFm.Name = "selectFm";
+            this.selectFm.Size = new System.Drawing.Size(119, 128);
+            this.selectFm.TabIndex = 7;
+            this.selectFm.TabStop = false;
+            this.selectFm.Text = "選択";
+            // 
+            // eraseBtn
+            // 
+            this.eraseBtn.Appearance = System.Windows.Forms.Appearance.Button;
+            this.eraseBtn.BackgroundImage = global::Drawing.Properties.Resources.eraser;
+            this.eraseBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.eraseBtn.Location = new System.Drawing.Point(62, 18);
+            this.eraseBtn.Name = "eraseBtn";
+            this.eraseBtn.Size = new System.Drawing.Size(50, 50);
+            this.eraseBtn.TabIndex = 1;
+            this.eraseBtn.TabStop = true;
+            this.eraseBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.eraseBtn.UseVisualStyleBackColor = true;
+            this.eraseBtn.Click += new System.EventHandler(this.eraseBtn_Click);
+            // 
+            // moveBtn
+            // 
+            this.moveBtn.Appearance = System.Windows.Forms.Appearance.Button;
+            this.moveBtn.BackgroundImage = global::Drawing.Properties.Resources.move;
+            this.moveBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.moveBtn.Location = new System.Drawing.Point(6, 18);
+            this.moveBtn.Name = "moveBtn";
+            this.moveBtn.Size = new System.Drawing.Size(50, 50);
+            this.moveBtn.TabIndex = 0;
+            this.moveBtn.TabStop = true;
+            this.moveBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.moveBtn.UseVisualStyleBackColor = true;
+            this.moveBtn.Click += new System.EventHandler(this.moveBtn_Click);
             // 
             // MenuFm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(423, 167);
+            this.ClientSize = new System.Drawing.Size(549, 168);
             this.ControlBox = false;
+            this.Controls.Add(this.selectFm);
             this.Controls.Add(this.colorGb);
             this.Controls.Add(this.operateGb);
             this.Controls.Add(this.attributeGb);
@@ -324,6 +368,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.lineWidthNud)).EndInit();
             this.operateGb.ResumeLayout(false);
             this.colorGb.ResumeLayout(false);
+            this.selectFm.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -334,7 +379,7 @@
         private System.Windows.Forms.GroupBox drawingGb;
         private System.Windows.Forms.GroupBox ModeGb;
         private System.Windows.Forms.RadioButton drawBtn;
-        private System.Windows.Forms.RadioButton eraseBtn;
+        private System.Windows.Forms.RadioButton selectBtn;
         private System.Windows.Forms.CheckBox topMostCb;
         public System.Windows.Forms.RadioButton lineBtn;
         public System.Windows.Forms.RadioButton ovalBtn;
@@ -351,5 +396,8 @@
         private System.Windows.Forms.Button undoBtn;
         private System.Windows.Forms.GroupBox colorGb;
         private System.Windows.Forms.Button edgeColorBtn;
+        private System.Windows.Forms.GroupBox selectFm;
+        private System.Windows.Forms.RadioButton moveBtn;
+        private System.Windows.Forms.RadioButton eraseBtn;
     }
 }
