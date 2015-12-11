@@ -12,30 +12,28 @@ namespace Drawing
 
     public partial class DrawingFm
     {
-        #region Modeの定義
+        public bool dragState = false;
+
+        #region モード
         abstract public class Mode
         {
             public static int SELECT = 0;
             public static int DRAW = 1;
-            public static int ERASE = 2;
         }
 
         public void changeMode(int mode)
         {
             currentMode = mode;
+            select = null;
             if (mode == Mode.SELECT)
             {
                 modeTssl.Text = "選択モード";
+                selectMode = SelectMode.MOVE;
             }
             if (mode == Mode.DRAW)
             {
                 modeTssl.Text = "描画モード";
             }
-            if (mode == Mode.ERASE)
-            {
-                modeTssl.Text = "消去モード";
-            }
-
         }
 
         #endregion
@@ -82,20 +80,16 @@ namespace Drawing
         #region マウスイベント
         public void DrawingFm_MouseDown(object sender, MouseEventArgs e)
         {
-            //  描画状態フラグを有効にする
-            drawState = true;
+            //  ドラグ状態フラグを有効にする
+            dragState = true;
 
             if (currentMode == Mode.SELECT)
             {
-
+                selectModeMouseDown(e);
             }
             else if (currentMode == Mode.DRAW)
             {
                 drawModeMouseDown(e);
-            }
-            else if (currentMode == Mode.ERASE)
-            {
-                eraseModeMouseDown(e);
             }
         }
 
@@ -105,9 +99,14 @@ namespace Drawing
             coordinateXTssl.Text = "X = " + e.X.ToString();
             coordinateYTssl.Text = "Y = " + (e.Y - commandBarMs.Height).ToString();
             //  再描画
-            if (drawState)
+            if (currentMode == Mode.DRAW && dragState)
             {
                 redraw(e);
+            }
+
+            if (currentMode == Mode.SELECT)
+            {
+                 
             }
         }
 
@@ -117,16 +116,32 @@ namespace Drawing
             {
                 drawModeMouseUp(e);
             }
-            else if (currentMode == Mode.ERASE)
-            {
-                this.Invalidate();
-            }
-
+            //  ドラグ状態フラグを無効にする
+            dragState = false;
             //  保存状態フラグを無効に
             savedState = false;
             //  キャプションの更新
             setCaption();
         }
         #endregion
+
+        //  キャンバスの描画
+        private void DrawingFm_Paint(object sender, PaintEventArgs e)
+        {
+            Graphics g = e.Graphics;
+
+            //  shapeListの内容を描画
+            foreach (Shape sh in shapeList)
+            {
+                sh.Draw(g);
+            }
+
+            //  選択モード中で、矩形がnullでなければ
+            if (currentMode == Mode.SELECT && select != null)
+            {
+                select.Draw(g);
+            }
+
+        }
     }
 }
