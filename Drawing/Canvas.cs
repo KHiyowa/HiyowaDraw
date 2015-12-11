@@ -28,7 +28,7 @@ namespace Drawing
             if (mode == Mode.SELECT)
             {
                 modeTssl.Text = "選択モード";
-                selectMode = SelectMode.MOVE;
+                selectMode = SelectMode.ERASE;
             }
             if (mode == Mode.DRAW)
             {

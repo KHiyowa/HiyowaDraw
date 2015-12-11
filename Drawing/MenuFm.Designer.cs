@@ -334,6 +334,7 @@
             this.moveBtn.Appearance = System.Windows.Forms.Appearance.Button;
             this.moveBtn.BackgroundImage = global::Drawing.Properties.Resources.move;
             this.moveBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.moveBtn.Enabled = false;
             this.moveBtn.Location = new System.Drawing.Point(6, 18);
             this.moveBtn.Name = "moveBtn";
             this.moveBtn.Size = new System.Drawing.Size(50, 50);
